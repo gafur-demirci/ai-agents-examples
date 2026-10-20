@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liman · Tatil · Yaz → Kış</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lacivert: #0E2A47;
+    --kum: #F4F1EA;
+    --ikincil: #5E7080;
+    --eylem-koyu: #0B7A70;
+    --kenarlik: rgba(14, 42, 71, 0.10);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--kum);
+    color: var(--lacivert);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 24px 56px;
+  }
+  header { text-align: center; margin-bottom: 34px; }
+  header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.3px; }
+  header p { margin-top: 8px; font-size: 14px; color: var(--ikincil); }
+  .cift { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; }
+  .kart {
+    width: 340px;
+    background: #fff;
+    border: 1px solid var(--kenarlik);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 18px 36px -18px rgba(11, 122, 112, .25);
+  }
+  .kart img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+  .kart .bilgi { padding: 14px 18px 16px; border-top: 1px solid var(--kenarlik); }
+  .kart .rozet { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; }
+  .kart.yaz .rozet { background: rgba(31, 191, 174, .18); color: var(--eylem-koyu); }
+  .kart.kis .rozet { background: rgba(14, 42, 71, .08); color: var(--lacivert); }
+  .kart .aciklama { margin-top: 8px; font-size: 12.5px; font-weight: 600; line-height: 1.5; color: var(--ikincil); }
+  .ok { align-self: center; font-size: 26px; font-weight: 800; color: var(--eylem-koyu); }
+  .not { margin-top: 32px; font-size: 11.5px; font-weight: 600; color: var(--ikincil); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Tatil · Yaz → Kış</h1>
+  <p>Aralık kampanyası: aynı sahne, aynı kompozisyon, aynı el — yalnız mevsim değişti.</p>
+</header>
+<div class="cift">
+  <div class="kart yaz">
+    <img src="tatil.png" alt="Tatil — yaz sürümü">
+    <div class="bilgi">
+      <span class="rozet">Yaz</span>
+      <p class="aciklama">Türkuaz dalgalarda yelkenli, güneşli ada, kum sahili.</p>
+    </div>
+  </div>
+  <div class="ok" aria-hidden="true">→</div>
+  <div class="kart kis">
+    <img src="tatil-kis.png" alt="Tatil — kış sürümü">
+    <div class="bilgi">
+      <span class="rozet">Kış</span>
+      <p class="aciklama">Donmuş buz yüzeyinde kızaklı yelkenli, karlı palmiye, soluk kış güneşi.</p>
+    </div>
+  </div>
+</div>
+<p class="not">Kurgusal senaryo, eğitim amaçlı.</p>
+</body>
+</html>

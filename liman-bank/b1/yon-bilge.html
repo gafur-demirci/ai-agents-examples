@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liman · Tutar ve tarih — Bilge yönü</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0E2A47;
+    --teal:#1FBFAE;
+    --kum:#F4F1EA;
+    --ink-60:rgba(14,42,71,.62);
+    --ink-45:rgba(14,42,71,.45);
+    --line:#E7E3DA;
+    --line-2:#EFEBE3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Manrope',sans-serif;
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:16px;padding:34px 16px;
+    background:
+      radial-gradient(640px 360px at 85% -8%, rgba(14,42,71,.06), transparent 60%),
+      linear-gradient(180deg,#F7F5F0,#ECE7DC);
+    color:var(--navy);
+  }
+  .device-hint{font-size:12px;letter-spacing:.4px;color:var(--ink-45);font-weight:600}
+  .pagefoot{font-size:11.5px;color:var(--ink-45);font-weight:500}
+
+  .phone{
+    width:390px;height:844px;flex:none;
+    background:#FFFFFF;border-radius:46px;
+    border:11px solid #101820;
+    box-shadow:0 46px 90px -34px rgba(14,42,71,.45);
+    overflow:hidden;position:relative;
+  }
+  .screen{height:100%;overflow-y:auto;scrollbar-width:none}
+  .screen::-webkit-scrollbar{display:none}
+
+  .top{padding:10px 20px 0}
+  .status{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;padding:8px 4px 0}
+  .sicons{display:flex;align-items:center;gap:6px}
+  .appbar{display:flex;align-items:center;justify-content:space-between;margin:14px 0 12px}
+  .back{
+    width:42px;height:42px;border-radius:15px;border:1px solid var(--line);
+    background:#fff;color:var(--navy);display:grid;place-items:center;cursor:pointer;
+  }
+  .ttl{font-size:14px;font-weight:800;letter-spacing:.3px}
+  .dots{display:flex;gap:7px;align-items:center}
+  .dots span{width:7px;height:7px;border-radius:99px;background:#EAE6DD}
+  .dots span.on{width:20px;background:var(--navy)}
+
+  h1{font-size:25px;font-weight:800;letter-spacing:-.3px;padding:0 20px}
+  .sub{margin:8px 20px 0;font-size:13.5px;line-height:1.6;color:var(--ink-60)}
+
+  .amount-block{margin:22px 20px 0;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .lbl{font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-45)}
+  .amount{display:flex;align-items:baseline;gap:10px;margin-top:8px;font-variant-numeric:tabular-nums}
+  .amount .cur{font-size:24px;font-weight:700;color:var(--navy)}
+  .amount input{
+    border:none;outline:none;flex:1;min-width:0;
+    font-family:inherit;font-size:46px;font-weight:800;letter-spacing:-1.2px;color:var(--navy);
+    background:transparent;
+  }
+  .amount-line{
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+    border-bottom:2px solid var(--navy);padding-bottom:10px;margin-top:2px;
+  }
+  .chips{display:flex;gap:8px}
+  .chip{
+    border:1px solid var(--line);background:#fff;border-radius:999px;
+    padding:7px 13px;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink-60);
+    cursor:pointer;font-variant-numeric:tabular-nums;
+  }
+  .chip.on{border-color:var(--navy);color:var(--navy);background:var(--kum)}
+  .calc{font-size:12px;color:var(--ink-45);font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  .grid{margin-top:18px;border-bottom:1px solid var(--line)}
+  .row{display:flex;padding:15px 20px;border-bottom:1px solid var(--line-2);gap:12px}
+  .row .k{flex:none;width:118px;font-size:12px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-45);padding-top:2px}
+  .row .v{font-size:15px;font-weight:700;flex:1;font-variant-numeric:tabular-nums}
+  .row .v small{display:block;font-size:11.5px;font-weight:600;color:var(--ink-45);margin-top:3px}
+
+  .tbl-head{display:flex;justify-content:space-between;align-items:baseline;padding:16px 20px 0}
+  .tbl-head b{font-size:13.5px;font-weight:800}
+  .tbl-head span{font-size:11.5px;font-weight:700;color:#159587}
+  table{width:100%;border-collapse:collapse;margin-top:8px}
+  th{
+    font-size:10.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;
+    color:var(--ink-45);text-align:right;padding:8px 20px 6px;border-bottom:1px solid var(--line);
+  }
+  th:first-child{text-align:left}
+  td{
+    font-size:13.5px;font-weight:700;text-align:right;
+    padding:9px 20px;border-bottom:1px solid var(--line-2);
+    font-variant-numeric:tabular-nums;
+  }
+  td:first-child{text-align:left;color:var(--ink-60);font-weight:600}
+  tr.sum td{
+    border-bottom:none;background:var(--kum);
+    font-weight:800;border-top:1.5px solid var(--navy);
+    padding-top:12px;padding-bottom:12px;
+  }
+  .more{display:flex;justify-content:flex-end;padding:9px 20px 2px}
+  .more button{
+    border:1px solid var(--line);background:#fff;border-radius:999px;
+    padding:8px 14px;font-family:inherit;font-size:12px;font-weight:700;color:var(--ink-60);cursor:pointer;
+  }
+
+  .cta{position:sticky;bottom:0;margin-top:16px;padding:14px 20px 12px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.96) 45%)}
+  .btn{
+    width:100%;border:none;border-radius:16px;background:var(--navy);color:#fff;
+    font-family:inherit;font-weight:800;font-size:15.5px;padding:16px;cursor:pointer;
+    transition:transform .12s;
+  }
+  .btn:active{transform:scale(.985)}
+  .cta-note{display:block;text-align:center;margin-top:9px;font-size:11.5px;color:var(--ink-45);font-weight:600}
+  .legal{text-align:center;font-size:10.5px;color:var(--ink-45);padding:4px 20px 20px;font-weight:500}
+</style>
+</head>
+<body>
+
+  <span class="device-hint">Liman Mobil · Birikim Hedefi — Yön 3 · Bilge</span>
+
+  <div class="phone" role="img" aria-label="Liman Mobil, Tutar ve tarih ekranı, bilge yönü">
+    <div class="screen">
+
+      <div class="top">
+        <div class="status">
+          <span>09:41</span>
+          <span class="sicons">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+            <svg width="16" height="12" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2,5.5 C6,1.8 12,1.8 16,5.5"/><path d="M4.8,8.6 C7.4,6.4 10.6,6.4 13.2,8.6"/><circle cx="9" cy="11.6" r="1.4" fill="currentColor" stroke="none"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.75" y="0.75" width="20.5" height="10.5" rx="3" stroke="currentColor" opacity=".5" stroke-width="1.2"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.6" fill="currentColor"/><path d="M23.2,4.2 v3.6" stroke="currentColor" opacity=".5" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+        <div class="appbar">
+          <button class="back" type="button" aria-label="Geri">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <span class="ttl">Tutar ve tarih</span>
+          <div class="dots" aria-label="6 adımdan 3. adım">
+            <span></span><span></span><span class="on"></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+
+      <h1>Ne kadar, ne zaman, net.</h1>
+      <p class="sub">Aylık aktarımı belirle; toplam süre ve varış tarihi anında hesaplanır. Her tutarın gerçek karşılığı aşağıda.</p>
+
+      <div class="amount-block">
+        <span class="lbl">Aylık aktarım</span>
+        <div class="amount">
+          <span class="cur">₺</span>
+          <input id="amt" type="text" inputmode="numeric" value="7.500" aria-label="Aylık aktarım tutarı">
+        </div>
+        <div class="amount-line">
+          <div class="chips">
+            <button type="button" class="chip" data-v="5000">5.000</button>
+            <button type="button" class="chip on" data-v="7500">7.500</button>
+            <button type="button" class="chip" data-v="10000">10.000</button>
+          </div>
+          <span class="calc" id="calc">60.000 ÷ 7.500 = 8 ay</span>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="row">
+          <span class="k">Hedef</span>
+          <span class="v">Yaz tatili <small>Kategori · Tatil</small></span>
+        </div>
+        <div class="row">
+          <span class="k">Tutar</span>
+          <span class="v" id="vGoal">60.000,00 ₺</span>
+        </div>
+        <div class="row">
+          <span class="k">Ay</span>
+          <span class="v"><span id="vCount">8</span> aktarım <small id="vRange">Aralık 2026 – Temmuz 2027</small></span>
+        </div>
+        <div class="row">
+          <span class="k">Aktarım günü</span>
+          <span class="v">Her ayın 1'i <small>İlk aktarım · 1 Aralık 2026</small></span>
+        </div>
+        <div class="row">
+          <span class="k">Varış</span>
+          <span class="v" id="vWhen">1 Temmuz 2027</span>
+        </div>
+        <div class="row">
+          <span class="k">Bakiye etkisi</span>
+          <span class="v" id="vAfter">15.918,75 ₺ <small>İlk aktarım sonrası · vadesiz 23.418,75 ₺</small></span>
+        </div>
+      </div>
+
+      <div class="tbl-head">
+        <b>Aktarım planı</b>
+        <span id="planTag">8 satırın 8'i gösteriliyor</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Tarih</th><th>Tutar</th><th>Kalan hedef</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div class="more"><button type="button" id="toggle">Kalanı göster</button></div>
+
+      <div class="cta">
+        <button class="btn" type="button">Devam et</button>
+        <span class="cta-note">Sonraki adım · Otomatik aktarım</span>
+      </div>
+      <p class="legal">Kurgusal senaryo, eğitim amaçlı.</p>
+    </div>
+  </div>
+
+  <p class="pagefoot">Kurgusal senaryo, eğitim amaçlı.</p>
+
+<script>
+  const GOAL = 60000;
+  const BAL  = 23418.75;
+  const MN = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+  const ROWS = 8, SHORT = 3;
+  let amt = 7500, expanded = false;
+  const $ = id => document.getElementById(id);
+
+  function parse(v){ return Number(String(v).replace(/\./g,'').replace(',','.')) || 0; }
+  function fmt(n){ return n.toLocaleString('tr-TR'); }
+  function fmt2(n){ return n.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function dstr(d){ return d.getDate() + ' ' + MN[d.getMonth()] + ' ' + d.getFullYear(); }
+  function endOf(a){ const m = Math.ceil(GOAL / a); return { m, d: new Date(2026, 11 + m - 1, 1) }; }
+
+  function render(){
+    amt = Math.min(30000, Math.max(1000, amt));
+    const months = Math.ceil(GOAL / amt);
+    const last   = (amt * months - GOAL);            /* son aktarımdaki fark */
+    const per    = (months > 1) ? amt - Math.ceil(last / (months - 1)) : amt;
+    const endD   = new Date(2026, 11 + months - 1, 1);
+
+    $('amt').value = fmt(amt);
+    $('calc').textContent = fmt(GOAL) + ' ÷ ' + fmt(amt) + ' = ' + months + ' ay';
+    $('vCount').textContent = months;
+    $('vRange').textContent = 'Aralık 2026 – ' + MN[endD.getMonth()] + ' ' + endD.getFullYear();
+    $('vWhen').textContent = dstr(endD);
+    $('vAfter').innerHTML = fmt2(BAL - amt) + ' ₺ <small>İlk aktarım sonrası · vadesiz ' + fmt2(BAL) + ' ₺</small>';
+
+    let paid = 0, rows = '';
+    for (let i = 0; i < months; i++){
+      const d = new Date(2026, 11 + i, 1);
+      const t = (i === months - 1) ? GOAL - per * (months - 1) : per;
+      paid += t;
+      const remain = GOAL - paid;
+      const hidden = (!expanded && i >= SHORT) ? ' style="display:none"' : '';
+      rows += '<tr' + hidden + '><td>' + dstr(d) + '</td><td>' + fmt2(t) + ' ₺</td><td>' + fmt2(remain) + ' ₺</td></tr>';
+    }
+    rows += '<tr class="sum"><td>Toplam</td><td>' + fmt2(GOAL) + ' ₺</td><td>0,00 ₺</td></tr>';
+    $('tbody').innerHTML = rows;
+
+    const hid = months - SHORT;
+    $('planTag').textContent = expanded ? (months + ' satırın tümü gösteriliyor') : (months + ' satırın ' + SHORT + "'ü gösteriliyor");
+    $('toggle').style.display = (months > SHORT) ? '' : 'none';
+    $('toggle').textContent = expanded ? 'Kalanı gizle' : 'Kalan ' + hid + ' satırı göster';
+  }
+
+  document.querySelectorAll('.chip').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+      c.classList.add('on');
+      amt = parseInt(c.dataset.v, 10);
+      render();
+    });
+  });
+
+  $('amt').addEventListener('input', e => {
+    document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+    amt = parse(e.target.value);
+    if (amt > 0) render();
+  });
+  $('amt').addEventListener('blur', render);
+
+  $('toggle').addEventListener('click', () => { expanded = !expanded; render(); });
+
+  render();
+</script>
+</body>
+</html>

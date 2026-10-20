@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liman Mobil · Birikim Hedefi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+<div class="tel">
+
+  <!-- ═══════════ 1 · ANA SAYFA (hedef yok → boş durum) ═══════════ -->
+  <section class="ekran" id="ekran-ana" aria-label="Ana sayfa">
+    <div class="durum"><span>09:41</span><span>●●●</span></div>
+    <div class="appbar">
+      <span class="marka-yazisi">Liman</span>
+      <span class="kullanici">Ece</span>
+    </div>
+    <div class="govde">
+      <h1 class="ekran-basligi">Merhaba Ece</h1>
+      <p class="alt-yazi">Birikim Hedefi ile küçük adımlar büyük yolcatılara döner.</p>
+
+      <!-- Lansman duyuru kartı: hedef kurulmuşsa kaybolur -->
+      <div class="duyuru-karti" id="duyuru-karti">
+        <img class="duyuru-ill" src="gorseller/tatil.png" alt="Birikim Hedefi lansman illüstrasyonu: yaz tatili sahnesi">
+        <div class="duyuru-govde">
+          <span class="duyuru-rozet">Yeni</span>
+          <h2 class="duyuru-baslik">Hedefini koy, yola çık.</h2>
+          <p class="duyuru-yazi">Tutarını ve tarihini seç; her ayın seçtiğin gününde aktarım otomatik işler.</p>
+          <button class="btn duyuru-dugme" id="duyuru-dugme">Hedefini kur</button>
+        </div>
+      </div>
+
+      <p class="bolum-ettiketi">Birikim Hedefin</p>
+      <div id="hedef-kutusu"></div>
+    </div>
+    <div class="alt-bant"><p class="kucuk-yazi">Kurgusal senaryo, eğitim amaçlı</p></div>
+  </section>
+
+  <!-- ═══════════ 2 · KATEGORİ SEÇİMİ ═══════════ -->
+  <section class="ekran" id="ekran-kategori" hidden aria-label="Kategori seçimi">
+    <div class="durum"><span>09:41</span><span>●●●</span></div>
+    <div class="appbar">
+      <button class="ikon-dugme geri" data-gidis="ekran-ana" aria-label="Geri">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="baslik-kucuk">Kategori seç</span>
+      <span class="adim-noktalari" data-adim="1"><i></i><i></i><i></i><i></i></span>
+    </div>
+    <div class="govde">
+      <h1 class="ekran-basligi">Nereye gitmek<br>istersin?</h1>
+      <p class="alt-yazi">Bir kategori seç, rotayı birlikte çizelim.</p>
+      <div class="cip-grup" id="kategori-grubu"></div>
+    </div>
+    <div class="alt-bant">
+      <button class="btn" id="kategori-devam" disabled>Kategoriyi seç</button>
+      <p class="kucuk-yazi">Kurgusal senaryo, eğitim amaçlı</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ 3 · TUTAR VE TARİH ═══════════ -->
+  <section class="ekran" id="ekran-tutar" hidden aria-label="Tutar ve tarih">
+    <div class="durum"><span>09:41</span><span>●●●</span></div>
+    <div class="appbar">
+      <button class="ikon-dugme geri" data-gidis="ekran-kategori" aria-label="Geri">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="baslik-kucuk">Tutar ve tarih</span>
+      <span class="adim-noktalari" data-adim="2"><i></i><i class="on"></i><i></i><i></i></span>
+    </div>
+    <div class="govde">
+      <h1 class="ekran-basligi" id="tutar-basligi">Hedefini koy,<br>yola çık.</h1>
+      <p class="alt-yazi" id="tutar-ozet"></p>
+
+      <p class="bolum-ettiketi">Tempo</p>
+      <div class="tempo-kutu" role="group" aria-label="Aylık aktarım temposu">
+        <button type="button" data-tutar="5000"  data-sure="12"><b>5.000,00 TL</b><small>12 ay · uzun kıyı</small></button>
+        <button type="button" data-tutar="7500"  data-sure="8" class="secili"><b>7.500,00 TL</b><small>8 ay · sakin deniz</small></button>
+        <button type="button" data-tutar="10000" data-sure="6"><b>10.000,00 TL</b><small>6 ay · rüzgâr ardına</small></button>
+      </div>
+
+      <div class="ayarlama">
+        <button class="ikon-dugme" id="tutar-azalt" aria-label="Tutarı azalt">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>
+        </button>
+        <span class="ayarlama-yazi">Kendi temponu kur · <b id="aylik-gosterge">7.500,00 TL</b>/ay</span>
+        <button class="ikon-dugme" id="tutar-artir" aria-label="Tutarı artır">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+
+      <div class="rota" id="rota-listesi"></div>
+    </div>
+    <div class="alt-bant">
+      <button class="btn" id="tutar-devam">Rotayı onayla</button>
+      <p class="kucuk-yazi">Sonraki adım · Otomatik aktarım</p>
+      <p class="kucuk-yazi">Kurgusal senaryo, eğitim amaçlı</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ 4 · OTOMATİK AKTARIM ═══════════ -->
+  <section class="ekran" id="ekran-aktarim" hidden aria-label="Otomatik aktarım">
+    <div class="durum"><span>09:41</span><span>●●●</span></div>
+    <div class="appbar">
+      <button class="ikon-dugme geri" data-gidis="ekran-tutar" aria-label="Geri">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="baslik-kucuk">Otomatik aktarım</span>
+      <span class="adim-noktalari" data-adim="3"><i></i><i></i><i class="on"></i><i></i></span>
+    </div>
+    <div class="govde">
+      <h1 class="ekran-basligi">Rota otomatik<br>çizilsin.</h1>
+      <p class="alt-yazi">Her ayın seçtiğin gününde tutar vadesiz hesabından hedefe aktarılır. İstediğinde durdurabilirsin.</p>
+
+      <div class="secim-satiri">
+        <div class="secim-baslik">Aktarım günü</div>
+        <div class="cip-grup" id="gun-grubu"></div>
+      </div>
+      <div class="secim-satiri">
+        <div class="secim-baslik">İlk aktarım</div>
+        <div class="cip-grup" id="ilk-aktarim-grubu"></div>
+      </div>
+
+      <div class="bilgi-band">
+        <span class="b-ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.5" r=".5" fill="currentColor"/></svg></span>
+        <div class="b-yazi">Yolculuğun karışmaması için bakiyeni kontrol et: vadesiz hesabında <b id="bakiye-gosterge">23.418,75 TL</b> var. <span class="b-alt">Aktarım günü bakiye yetersizse talimat ertesi gün bir kez daha denenir.</span></div>
+      </div>
+    </div>
+    <div class="alt-bant">
+      <button class="btn" id="aktarim-devam">Devam et</button>
+      <p class="kucuk-yazi">Kurgusal senaryo, eğitim amaçlı</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ 5 · ONAY ═══════════ -->
+  <section class="ekran" id="ekran-onay" hidden aria-label="Onay">
+    <div class="durum"><span>09:41</span><span>●●●</span></div>
+    <div class="appbar">
+      <button class="ikon-dugme geri" data-gidis="ekran-aktarim" aria-label="Geri">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="baslik-kucuk">Onay</span>
+      <span class="adim-noktalari" data-adim="4"><i></i><i></i><i></i><i class="on"></i></span>
+    </div>
+    <div class="govde">
+      <h1 class="ekran-basligi">Her şey yerlinde<br>mi?</h1>
+      <p class="alt-yazi">Küçük bir kontrol, sonra yola çıkıyoruz.</p>
+      <div class="onay-karti" id="onay-ozeti"></div>
+      <div class="onay-sorusu">
+        <p class="soru-basligi">Kararını bekliyoruz</p>
+        <label class="izin-satiri">
+          <input type="checkbox" id="sigorta-onay">
+          <span><b>Birikim Koruma Sigortası</b> · aylık 49,90 TL <span class="soluk">İsteğe bağlıdır, istediğinde kaldırabilirsin. Detaylar onay sonrası açılır.</span></span>
+        </label>
+      </div>
+    </div>
+    <div class="alt-bant">
+      <button class="btn" id="onay-devam">Hedefi kur</button>
+      <p class="kucuk-yazi" id="sigorta-durum-yazi">Sigorta kararı vermeden devam edemezsin</p>
+      <p class="kucuk-yazi">Kurgusal senaryo, eğitim amaçlı</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ 6 · BAŞARI ═══════════ -->
+  <section class="ekran ekran-basari" id="ekran-basari" hidden aria-label="Başarı">
+    <div class="durum"><span>09:41</span><span>●●●</span></div>
+    <div class="appbar"><span class="marka-yazisi">Liman</span><span class="kullanici">Ece</span></div>
+    <div class="govde govde-merkez">
+      <img class="basari-ill" src="gorseller/basari.png" alt="Hedef kurulumu tamamlandı: sahilde bayraklı kutlama illüstrasyonu">
+      <h1 class="ekran-basligi">Hedefin kuruldu.</h1>
+      <p class="alt-yazi" id="basari-ozet"></p>
+      <button class="btn" id="basari-devam">Hedefi gör</button>
+    </div>
+    <div class="alt-bant"><p class="kucuk-yazi">Kurgusal senaryo, eğitim amaçlı</p></div>
+  </section>
+
+  <!-- ═══════════ 7 · HEDEF DETAYI ═══════════ -->
+  <section class="ekran" id="ekran-detay" hidden aria-label="Hedef detayı">
+    <div class="durum"><span>09:41</span><span>●●●</span></div>
+    <div class="appbar">
+      <button class="ikon-dugme geri" data-gidis="ekran-ana" aria-label="Geri">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="baslik-kucuk">Hedef detayı</span>
+      <button class="ikon-dugme ince" data-gidis="ekran-duzenle" aria-label="Hedefi düzenle">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3.5 20.5 7 9 18.5l-4.5 1 1-4.5L17 3.5Z"/></svg>
+      </button>
+    </div>
+    <div class="govde">
+      <img class="detay-ill" id="detay-ill" src="gorseller/tatil.png" alt="Yaz tatili hedefinin illüstrasyonu: turkuaz denizde yelkenli ve ada">
+      <div class="hedef-bilgi">
+        <span class="cip secili-kucuk" id="detay-kategori-chip">Tatil</span>
+        <h1 class="hedef-ad" id="detay-ad">Yaz tatili</h1>
+      </div>
+      <div class="halka-satiri">
+        <div class="halka" id="detay-halka" role="img" aria-label="Birikim ilerlemesi: yüzde 25, 15.000,00 TL birikti"><span class="halka-ic" id="detay-yuzde">%0</span></div>
+        <div class="halka-yazi" id="detay-halka-yazi"></div>
+      </div>
+      <p class="bolum-ettiketi">Geçmiş aktarımlar</p>
+      <div class="gecmis" id="gecmis-listesi"></div>
+    </div>
+    <div class="alt-bant">
+      <button class="btn ikincil" data-gidis="ekran-duzenle">Hedefi düzenle</button>
+      <p class="kucuk-yazi">Kurgusal senaryo, eğitim amaçlı</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ 8 · HEDEFİ DÜZENLE ═══════════ -->
+  <section class="ekran" id="ekran-duzenle" hidden aria-label="Hedefi düzenle">
+    <div class="durum"><span>09:41</span><span>●●●</span></div>
+    <div class="appbar">
+      <button class="ikon-dugme geri" data-gidis="ekran-detay" aria-label="Geri">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="baslik-kucuk">Hedefi düzenle</span><span></span>
+    </div>
+    <div class="govde">
+      <h1 class="ekran-basligi">Tempoyu sen<br>belirle.</h1>
+      <p class="alt-yazi">Aylık aktarımı ya da günü değiştirebilirsin; hedef kalanına göre yeniden hesaplanır.</p>
+
+      <div class="secim-satiri">
+        <div class="secim-baslik">Aylık aktarım</div>
+        <div class="ayarlama buyuk">
+          <button class="ikon-dugme" id="duzenle-azalt" aria-label="Tutarı azalt">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>
+          </button>
+          <b class="duzenle-gosterge" id="duzenle-tutar">7.500,00 TL</b>
+          <button class="ikon-dugme" id="duzenle-artir" aria-label="Tutarı artır">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+        <div class="tahmin" id="duzenle-tahmin"></div>
+      </div>
+
+      <div class="secim-satiri">
+        <div class="secim-baslik">Aktarım günü</div>
+        <div class="cip-grup" id="duzenle-gun-grubu"></div>
+      </div>
+
+      <div class="bilgi-band">
+        <span class="b-ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.5" r=".5" fill="currentColor"/></svg></span>
+        <div class="b-yazi">Değişiklik bir sonraki aktarımdan itibaren geçerli olur. <span class="b-alt">Hedef tutarı ve tarihi bu prototipte değişmez.</span></div>
+      </div>
+    </div>
+    <div class="alt-bant">
+      <button class="btn" id="duzenle-kaydet">Kaydet</button>
+      <p class="kucuk-yazi">Kurgusal senaryo, eğitim amaçlı</p>
+    </div>
+  </section>
+
+</div>
+<script src="akis.js"></script>
+</body>
+</html>

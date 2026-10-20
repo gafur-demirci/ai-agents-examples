@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liman · Birikim Hedefi · Gün Sonu Vitrini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* DESIGN.md görev token'ları */
+  :root {
+    --palet-turkuaz: #1FBFAE;
+    --palet-eylem-koyu: #0B7A70;
+    --palet-turkuaz-acik: #CDF1EC;
+    --palet-turkuaz-sis: #E9FAF8;
+    --palet-lacivert: #0E2A47;
+    --palet-kum: #F4F1EA;
+    --palet-beyaz: #FFFFFF;
+    --yuzey-ekran: var(--palet-beyaz);
+    --yuzey-sayfa: var(--palet-kum);
+    --yuzey-soft: var(--palet-turkuaz-sis);
+    --yuzey-cukur: var(--palet-turkuaz-acik);
+    --yuzey-koyu: var(--palet-lacivert);
+    --kart: var(--palet-beyaz);
+    --kart-kenarligi: rgba(14, 42, 71, 0.10);
+    --kenarlik-guclu: var(--palet-eylem-koyu);
+    --metin-ana: var(--palet-lacivert);
+    --metin-ikincil: #5E7080;
+    --metin-ters: var(--palet-beyaz);
+    --eylem: var(--palet-eylem-koyu);
+    --eylem-ustu-metin: var(--palet-beyaz);
+    --eylem-secili-zemin: var(--palet-turkuaz);
+    --eylem-secili-metin: var(--palet-lacivert);
+    --vurgu: var(--palet-turkuaz);
+    --basari-metin: var(--palet-eylem-koyu);
+    --golge-eylem: 0 16px 30px -14px rgba(11,122,112,.70);
+    --golge-panel: 0 18px 36px -18px rgba(11,122,112,.75);
+    --yk-2: 8px; --yk-3: 12px; --yk-4: 16px; --yk-5: 18px; --yk-6: 24px; --yk-8: 40px;
+    --kose-dugme: 18px; --kose-panel: 22px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--yuzey-sayfa);
+    color: var(--metin-ana);
+    line-height: 1.6;
+  }
+  .ic { max-width: 1180px; margin: 0 auto; padding: var(--yk-8) var(--yk-5); }
+  header.baslik { text-align: center; padding: var(--yk-8) 0; }
+  header.baslik h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; }
+  header.baslik p { color: var(--metin-ikincil); margin-top: var(--yk-2); font-weight: 600; }
+
+  section.bolum { margin-bottom: 72px; }
+  section.bolum > h2 {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.3px;
+    padding-bottom: var(--yk-2); margin-bottom: var(--yk-4);
+    border-bottom: 3px solid var(--vurgu);
+    display: inline-block;
+  }
+  .aciklama { color: var(--metin-ikincil); font-weight: 600; margin-bottom: var(--yk-4); }
+  .hazirlaniyor {
+    border: 2px dashed var(--kart-kenarligi); border-radius: var(--kose-panel);
+    padding: var(--yk-6); text-align: center; color: var(--metin-ikincil); font-weight: 700;
+  }
+
+  /* — Izgaralar — */
+  .dortlu { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--yk-4); }
+  .ikili { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--yk-4); }
+  .kart { background: var(--kart); border: 1px solid var(--kart-kenarligi); border-radius: var(--kose-panel); overflow: hidden; }
+  .kart img { width: 100%; display: block; }
+  .kart .ad { padding: var(--yk-2) var(--yk-3); font-size: 13px; font-weight: 800; border-top: 1px solid var(--kart-eklenen, transparent); }
+  .kart .ad small { display: block; font-weight: 600; color: var(--metin-ikincil); }
+
+  /* — Token tablosu — */
+  table.token { width: 100%; border-collapse: collapse; background: var(--kart); border-radius: var(--kose-panel); overflow: hidden; }
+  table.token th, table.token td { text-align: left; padding: var(--yk-2) var(--yk-3); border-bottom: 1px solid var(--kart-kenarligi); font-size: 14px; }
+  table.token th { background: var(--yuzey-soft); font-weight: 800; }
+  .swatch { display: inline-block; width: 44px; height: 22px; border-radius: 6px; vertical-align: middle; border: 1px solid var(--kart-kenarligi); }
+
+  /* — Tipografi örneği — */
+  .tipografi { background: var(--kart); border: 1px solid var(--kart-kenarligi); border-radius: var(--kose-panel); padding: var(--yk-5); }
+  .tipografi .ornek-baslik { font-size: 26px; font-weight: 800; line-height: 1.2; letter-spacing: -0.3px; }
+  .tipografi .ornek-govde { margin-top: var(--yk-2); font-size: 14px; color: var(--metin-ana); }
+  .tipografi .ornek-ikincil { margin-top: var(--yk-1); font-size: 14px; color: var(--metin-ikincil); font-weight: 600; }
+  .tipografi .para { margin-top: var(--yk-2); font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--eylem); }
+
+  /* — Bileşenler (açık/koyu) — */
+  .tema-cift { display: grid; grid-template-columns: 1fr 1fr; gap: var(--yk-4); }
+  .tema-kutu { border-radius: var(--kose-panel); padding: var(--yk-5); border: 1px solid var(--kart-kenarligi); }
+  .tema-kutu.acik { background: var(--kart); }
+  .tema-kutu.koyu { background: #1A3350; color: #F4F1EA; }
+  .tema-kutu h3 { font-size: 15px; font-weight: 800; margin-bottom: var(--yk-3); }
+  .orn-halka { --p: 40; width: 120px; height: 120px; border-radius: 50%;
+    background: conic-gradient(var(--vurgu) calc(var(--p) * 1%), #CDF1EC 0);
+    display: grid; place-items: center; }
+  .orn-halka .ic2 { width: 88px; height: 88px; background: #fff; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: var(--metin-ana); }
+  .koyu .orn-halka .ic2 { background: #213B56; color: #F4F1EA; }
+  .orn-dugme { display: inline-block; background: var(--eylem); color: var(--eylem-ustu-metin); font-weight: 800; font-size: 13px; padding: 10px 22px; border-radius: var(--kose-dugme); margin-top: var(--yk-3); }
+
+  /* — Video — */
+  video.post-video { width: 100%; max-width: 480px; border-radius: var(--kose-panel); border: 1px solid var(--kart-kenarligi); }
+
+  /* — Prototip bağlantısı — */
+  a.buyuk-link {
+    display: inline-block; margin: var(--yk-2) 0 var(--yk-4);
+    background: var(--eylem); color: var(--eylem-ustu-metin);
+    font-weight: 800; font-size: 15px; padding: 14px 30px;
+    border-radius: var(--kose-dugme); text-decoration: none;
+    box-shadow: var(--golge-eylem);
+  }
+  .uc-sabit { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--yk-4); }
+  .uc-sabit img { border-radius: var(--kose-panel); border: 1px solid var(--kart-kenarligi); }
+
+  footer { text-align: center; color: var(--metin-ikincil); font-weight: 500; padding: var(--yk-6) 0 var(--yk-8); }
+
+  @media (max-width: 900px) {
+    .dortlu { grid-template-columns: repeat(2, 1fr); }
+    .ikili, .tema-cift, .uc-sabit { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="ic">
+  <header class="baslik">
+    <h1>Birikim Hedefi — Gün Sonu Vitrini</h1>
+    <p>Yön: Kâşif · Söz: "Hedefini koy, yola çık."</p>
+  </header>
+
+  <section class="bolum">
+    <h2>1 · Yön çalışması</h2>
+    <p class="aciklama">Üç yönün ruhunu taşıyan sahne; Kâşif seçildi ve iyi çalışan ekran korundu.</p>
+    <div class="dortlu">
+      <div class="kart"><img src="ekranlar/stil.png" alt="Stil ekranı"><div class="ad">Stil temeli</div></div>
+      <div class="kart"><img src="ekranlar/yon-kasif.png" alt="Kâşif yönü ekranı"><div class="ad">Kâşif<small>seçilen yön</small></div></div>
+      <div class="kart"><img src="ekranlar/yon-koruyucu.png" alt="Koruyucu yön ekranı"><div class="ad">Koruyucu</div></div>
+      <div class="kart"><img src="ekranlar/yon-bilge.png" alt="Bilge yön ekranı"><div class="ad">Bilge</div></div>
+    </div>
+  </section>
+
+  <section class="bolum">
+    <h2>2 · Görsel dünya · Moodboard</h2>
+    <p class="aciklama">Kâşif palatının dört karesi: sahne, nesne, doku, ışık ve renk.</p>
+    <div class="dortlu">
+      <div class="kart"><img src="gorseller/kasif-1.png" alt="Kâşif moodboard 1 · sahne"></div>
+      <div class="kart"><img src="gorseller/kasif-2.png" alt="Kâşif moodboard 2 · pusula"></div>
+      <div class="kart"><img src="gorseller/kasif-3.png" alt="Kâşif moodboard 3 · doku"></div>
+      <div class="kart"><img src="gorseller/kasif-4.png" alt="Kâşif moodboard 4 · ışık"></div>
+    </div>
+  </section>
+
+  <section class="bolum">
+    <h2>3 · Tasarım sistemi · token'lar</h2>
+    <p class="aciklama">DESIGN.md §2 — palet ve görev katmanı.</p>
+    <table class="token">
+      <tr><th>Palet</th><th>Değer</th><th>Görev token'ı</th><th>Kullanım</th></tr>
+      <tr><td><span class="swatch" style="background:#0F8072"></span></td><td>#0B7A70</td><td>eylem</td><td>Birincil eylem zemini (koyu turkuaz)</td></tr>
+      <tr><td><span class="swatch" style="background:#1FBFAE"></span></td><td>#1FBFAE</td><td>vurgu, seçili zemin</td><td>Marka ana rengi: büyük alan, illüstrasyon, süs</td></tr>
+      <tr><td><span class="swatch" style="background:#CDF1EC"></span></td><td>#CDF1EC</td><td>yüzey-cukur</td><td>Boş kanallar, ilerleme yuvası</td></tr>
+      <tr><td><span class="swatch" style="background:#E9FAF8"></span></td><td>#E9FAF8</td><td>yüzey-soft</td><td>Sakin panel zemini</td></tr>
+      <tr><td><span class="swatch" style="background:#0E2A47"></span></td><td>#0E2A47</td><td>metin-ana</td><td>Başlık ve gövde yazısı</td></tr>
+      <tr><td><span class="swatch" style="background:#F4F1EA"></span></td><td>#F4F1EA</td><td>yüzey-sayfa</td><td>Sıcak kırık beyaz zemin</td></tr>
+    </table>
+  </section>
+
+  <section class="bolum">
+    <h2>4 · Kontrast tablosu</h2>
+    <p class="aciklama">DESIGN.md §3 — hesap scripts/kontrast.mjs, WCAG 2.1.</p>
+    <table class="token">
+      <tr><th>Çift</th><th>Oran</th><th>Normal AA</th><th>Büyük/arayüz</th></tr>
+      <tr><td>metin-ana / kart</td><td>14,57:1</td><td>✓</td><td>✓</td></tr>
+      <tr><td>metin-ikincil / kart</td><td>5,12:1</td><td>✓</td><td>✓</td></tr>
+      <tr><td>metin-ters / eylem</td><td>5,21:1</td><td>✓</td><td>✓</td></tr>
+      <tr><td>eylem-secili-metin / turkuaz zemin</td><td>6,33:1</td><td>✓</td><td>✓</td></tr>
+      <tr><td>hata-metin / kart</td><td>6,54:1</td><td>✓</td><td>✓</td></tr>
+      <tr><td>metin-ters / marka turkuazı</td><td>2,30:1</td><td>✗ yasak</td><td>✗</td></tr>
+    </table>
+  </section>
+
+  <section class="bolum">
+    <h2>5 · Tipografi</h2>
+    <p class="aciklama">DESIGN.md §4 — Manrope, tek aile; tabular-nums sayısal her yerde.</p>
+    <div class="tipografi">
+      <div class="ornek-baslik">Hedefini koy, yola çık.</div>
+      <p class="ornek-govde">Gövde 14/22: küçük adımlar büyük yolculuklara döner; birikim hedefin seni bekliyor.</p>
+      <p class="ornek-ikincil">İkincil 14/22: destekleyici açıklama, AA garantili.</p>
+      <p class="para">7.500,00 TL/ay · hedef 60.000,00 TL · 1 Temmuz 2027</p>
+    </div>
+  </section>
+
+  <section class="bolum">
+    <h2>6 · Bileşenler · açık ve koyu</h2>
+    <p class="bolum-tanimlama aciklama">Örnek: ilerleme halkası ve eylem düğmesi, iki temada.</p>
+    <div class="tema-cift">
+      <div class="tema-kutu acik">
+        <h3>Açık</h3>
+        <div class="orn-halka"><span class="ic2">%40</span></div>
+        <span class="orn-dugme">Rotayı onayla</span>
+      </div>
+      <div class="tema-kutu koyu">
+        <h3>Koyu</h3>
+        <div class="orn-halka"><span class="ic2">%40</span></div>
+        <span class="orn-dugme">Rotayı onayla</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum">
+    <h2>7 · İllüstrasyon seti</h2>
+    <p class="aciklama">Altı kategori, boş durum ve başarı — sekiz görsel, tek el.</p>
+    <div class="dortlu">
+      <div class="kart"><img src="gorseller/tatil.png" alt="Tatil — stil referansı"><div class="ad">Tatil<small>referans</small></div></div>
+      <div class="kart"><img src="gorseller/ev.png" alt="Ev"><div class="ad">Ev</div></div>
+      <div class="kart"><img src="gorseller/egitim.png" alt="Eğitim"><div class="ad">Eğitim</div></div>
+      <div class="kart"><img src="gorseller/araba.png" alt="Araba"><div class="ad">Araba</div></div>
+      <div class="kart"><img src="gorseller/dugun.png" alt="Düğün"><div class="ad">Düğün</div></div>
+      <div class="kart"><img src="gorseller/acil-durum.png" alt="Acil durum fonu"><div class="ad">Acil durum</div></div>
+      <div class="kart"><img src="gorseller/bos-durum.png" alt="Boş durum"><div class="ad">Boş durum</div></div>
+      <div class="kart"><img src="gorseller/basari.png" alt="Başarı"><div class="ad">Başarı</div></div>
+    </div>
+  </section>
+
+  <section class="bolum">
+    <h2>8 · Prototip</h2>
+    <p class="aciklama">Tıklanabilir 8 ekranlı akış; erişilebilirlik turundan onarılmış hâliyle.</p>
+    <a class="buyuk-link" href="../index.html">Prototipi aç — site/index.html</a>
+    <div class="uc-sabit">
+      <div class="kart"><img src="ekranlar/site-ana.png" alt="Ana sayfa boş durum"><div class="ad">Ana sayfa<small>hedef yok</small></div></div>
+      <div class="kart"><img src="ekranlar/site-tutar.png" alt="Tutar ve tarih ekranı"><div class="ad">Tutar ve tarih</div></div>
+      <div class="kart"><img src="ekranlar/site-detay.png" alt="Hedef detay ekranı"><div class="ad">Hedef detayı</div></div>
+    </div>
+  </section>
+
+  <section class="bolum">
+    <h2>9 · Kampanya</h2>
+    <p class="aciklama">Duyuru kartı prototipte canlı; görsel parçalar ve videolar aşağıda.</p>
+    <div class="ikili">
+      <div class="kart"><img src="gorseller/post-4x5.png" alt="Instagram post 4:5"><div class="ad">Instagram post<small>1080×1350</small></div></div>
+      <div class="kart"><img src="gorseller/story-9x16.png" alt="Instagram story 9:16"><div class="ad">Instagram story<small>1080×1920 · üst 250 / alt 340 yazısız</small></div></div>
+    </div>
+    <div class="uc-sabit" style="margin-top:16px">
+      <div class="kart"><img src="gorseller/appstore-1.png" alt="App Store 1" style="aspect-ratio:1206/2622; object-fit:cover; object-position:top;"></div>
+      <div class="kart"><img src="gorseller/appstore-2.png" alt="App Store 2" style="aspect-ratio:1206/2622; object-fit:cover; object-position:top;"></div>
+      <div class="kart"><img src="gorseller/appstore-3.png" alt="App Store 3" style="aspect-ratio:1206/2622; object-fit:cover; object-position:top;"></div>
+    </div>
+    <p class="aciklama" style="margin-top:20px">Animasyonlu post (CSS keyframes, JS'siz):</p>
+    <video class="post-video" controls muted playsinline src="animasyonlu-post.mp4"></video>
+  </section>
+
+  <section class="bolum">
+    <h2>10 · Erişilebilirlik</h2>
+    <p class="aciklama">WCAG 2.2 AA denetimi: 2 ihlal → 0. Üç bulgu:</p>
+    <table class="token">
+      <tr><th>#</th><th>Bulgu</th><th>Düzeltme</th></tr>
+      <tr><td>1</td><td>Turkuaz zeminde %80 opak etiket 4,2:1 (1.4.3)</td><td>Opaklık kaldırıldı, tam lacivert</td></tr>
+      <tr><td>2</td><td>İlerleme halkasında alt metni yok (1.1.1)</td><td>aria-label statik + dinamik</td></tr>
+      <tr><td>3</td><td>Onay kutusu 13×18 dokunma hedefi (2.5.8)</td><td>26×26'ya büyütüldü</td></tr>
+    </table>
+    <img src="gorseller/erisilebilirlik-once-sonra.png" alt="Onay ekranı önce ve sonra" style="margin-top:16px; border-radius:var(--kose-panel); border:1px solid var(--kart-kenarligi); max-width:100%;">
+  </section>
+
+  <footer>Kurgusal senaryo, eğitim amaçlı · Liman Bank kurgusal bir bankadır</footer>
+</div>
+</body>
+</html>

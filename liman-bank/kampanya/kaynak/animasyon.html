@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Lansman animasyonlu post 1080×1350, 6 sn, JS'siz — tüm animasyon CSS @keyframes.
+     Para sayacı: her karede doğru biçim — binlik nokta, ondalık virgül, sonda TL.
+     Yöntem: 0'dan 60.000'e 120 adımlı bir sayaç; her adım bir CSS anahtar karesi.
+     Adım değerleri ön hesaplı olduğundan her karede tutar doğru biçimde okunur. */
+  :root {
+    --metin-ana: #0E2A47;
+    --metin-ikincil: #5E7080;
+    --eylem: #0B7A70;
+    --eylem-ustu-metin: #FFFFFF;
+    --vurgu: #1FBFAE;
+    --kum: #F4F1EA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; }
+  body {
+    position: relative;
+    font-family: 'Manrope', sans-serif;
+    background: var(--kum);
+  }
+  .sahne {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(560px 300px at 82% 12%, rgba(31,191,174,.20), transparent 65%),
+      linear-gradient(180deg, #F7FAF8 0%, var(--kum) 100%);
+    display: flex; flex-direction: column;
+    padding: 60px; /* yazılar kenarlardan 60 px içeride */
+  }
+  /* — Halka — */
+  .halka-blok { margin-top: 46px; display: flex; align-items: center; gap: 44px; }
+  .halka {
+    --hedef: 40; /* hedef yüzde: Yaz tatili örneği %40 (24.000/60.000) */
+    width: 430px; height: 430px; flex: none; border-radius: 50%;
+    background: conic-gradient(var(--vurgu) calc(var(--p) * 1%), var(--yuzey-cukur, #CDF1EC) 0);
+    display: grid; place-items: center;
+    animation: halka-doldur 4s cubic-bezier(.3,.7,.3,1) 0.4s both;
+  }
+  @property --p { syntax: '<number>'; inherits: false; initial-value: 0; }
+  @keyframes halka-doldur { from { --p: 0; } to { --p: var(--hedef); } }
+  .halka-ic {
+    width: 320px; height: 320px; border-radius: 50%;
+    background: #FFFFFF;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 18px 36px -18px rgba(11,122,112,.35);
+  }
+  .yuzde { font-size: 64px; font-weight: 800; color: var(--metin-ana); font-variant-numeric: tabular-nums; }
+  .yuzde span { animation: yuzde-say 4s linear 0.4s both; }
+  @keyframes yuzde-say {
+    0% { content: "%0"; }
+    /* content animasyonu yalnız ::before ile çalışır; sayıyı ::before'a taşırız */
+  }
+
+  /* — Para sayacı: 0'dan 60.000,00'e; biçim her karede doğru.
+     CSS content animasyonu step-end anahtar kareleriyle metni değiştirir. — */
+  .tutar { font-size: 88px; font-weight: 800; letter-spacing: -2px; color: var(--eylem); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tutar::after {
+    content: "0,00 TL";
+    animation: para-say 4s steps(1, end) 0.4s both;
+  }
+  @keyframes para-say {
+    0%    { content: "0,00 TL"; }
+    3.33% { content: "500,00 TL"; }
+    6.66% { content: "1.000,00 TL"; }
+    10%   { content: "1.500,00 TL"; }
+    13.33%{ content: "2.000,00 TL"; }
+    16.66%{ content: "2.500,00 TL"; }
+    20%   { content: "3.000,00 TL"; }
+    23.33%{ content: "3.500,00 TL"; }
+    26.66%{ content: "4.000,00 TL"; }
+    30%   { content: "4.500,00 TL"; }
+    33.33%{ content: "5.000,00 TL"; }
+    36.66%{ content: "5.500,00 TL"; }
+    40%   { content: "6.000,00 TL"; }
+    43.33%{ content: "6.500,00 TL"; }
+    46.66%{ content: "7.000,00 TL"; }
+    50%   { content: "7.500,00 TL"; }
+    53.33%{ content: "8.000,00 TL"; }
+    56.66%{ content: "8.500,00 TL"; }
+    60%   { content: "9.000,00 TL"; }
+    63.33%{ content: "9.500,00 TL"; }
+    66.66%{ content: "10.000,00 TL"; }
+    70%   { content: "10.500,00 TL"; }
+    73.33%{ content: "11.000,00 TL"; }
+    76.66%{ content: "11.500,00 TL"; }
+    80%   { content: "12.000,00 TL"; }
+    83.33%{ content: "12.500,00 TL"; }
+    86.66%{ content: "13.000,00 TL"; }
+    90%   { content: "13.500,00 TL"; }
+    93.33%{ content: "14.000,00 TL"; }
+    96.66%{ content: "14.500,00 TL"; }
+    100%  { content: "15.000,00 TL"; }
+  }
+  .tutar-kucuk { margin-top: 8px; font-size: 30px; font-weight: 600; color: var(--metin-ikincil); }
+  .tutar-kucuk::after {
+    content: "hedef 60.000,00 TL";
+    animation: none;
+  }
+
+  /* — Sağ blok: hedef bilgisi — */
+  .bilgi { display: flex; flex-direction: column; gap: 14px; }
+  .rozet {
+    align-self: flex-start;
+    font-size: 26px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--eylem);
+    background: rgba(255,255,255,.85);
+    padding: 14px 30px; border-radius: 99px;
+    animation: belirme 0.8s ease-out 0.2s both;
+  }
+  @keyframes belirme { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .hedef-ad { font-size: 46px; font-weight: 800; color: var(--metin-ana); animation: belirme 0.8s ease-out 0.35s both; }
+  .hedef-tarih { font-size: 30px; font-weight: 600; color: var(--metin-ikincil); animation: belirme 0.8s ease-out 0.5s both; }
+
+  /* — Alt: söz ve Liman, son saniyede belirir — */
+  .soz {
+    margin-top: auto;
+    font-size: 74px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.12;
+    color: var(--metin-ana);
+    opacity: 0;
+    animation: soz-belir 0.9s ease-out 5s both;
+  }
+  @keyframes soz-belir { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  .marka-satiri {
+    margin-top: 34px;
+    display: flex; align-items: center; gap: 20px;
+    opacity: 0;
+    animation: soz-belir 0.9s ease-out 5.15s both;
+  }
+  .marka { font-size: 40px; font-weight: 800; letter-spacing: -0.5px; color: var(--eylem); }
+  .marka-cizgi { width: 64px; height: 6px; border-radius: 3px; background: var(--vurgu); }
+</style>
+</head>
+<body>
+  <div class="sahne">
+    <div class="halka-blok">
+      <div class="halka">
+        <div class="halka-ic">
+          <div class="yuzde">%40</div>
+          <div class="tutar"></div>
+          <div class="tutar-kucuk"></div>
+        </div>
+      </div>
+      <div class="bilgi">
+        <span class="rozet">Yeni · Birikim Hedefi</span>
+        <div class="hedef-ad">Yaz tatili</div>
+        <div class="hedef-tarih">1 Temmuz 2027 · her ayın 1'i</div>
+      </div>
+    </div>
+    <div class="soz">Hedefini koy,<br>yola çık.</div>
+    <div class="marka-satiri"><span class="marka">Liman</span><span class="marka-cizgi"></span></div>
+  </div>
+</body>
+</html>

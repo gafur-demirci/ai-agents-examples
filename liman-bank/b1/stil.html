@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İşbank — Birikim Hedefi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#FFDD00;
+    --yellow-deep:#F6CE00;
+    --ink:#0A1A33;
+    --ink-soft:rgba(10,26,51,.72);
+    --ink-faint:rgba(10,26,51,.45);
+    --grey:#8A8F98;
+    --line:#E9EAEE;
+    --bg:#F4F5F7;
+    --card:#FFFFFF;
+    --green:#0F9D58;
+    --blue:#0077E6;
+    --shadow:0 20px 50px -18px rgba(10,26,51,.18);
+    --radius-lg:28px;
+    --radius-md:20px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:'Manrope',sans-serif;
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(255,221,0,.45), transparent 60%),
+      radial-gradient(700px 420px at -10% 100%, rgba(0,150,255,.10), transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* ---------- App bar ---------- */
+  .appbar{
+    display:flex;align-items:center;gap:16px;
+    padding:20px 28px;
+  }
+  .badge{
+    width:44px;height:44px;border-radius:14px;
+    background:var(--yellow);
+    display:grid;place-items:center;
+    font-weight:800;font-size:18px;color:var(--ink);
+    box-shadow:0 8px 20px -8px rgba(246,206,0,.9);
+    flex-shrink:0;
+  }
+  .appbar h1{font-size:16px;font-weight:800;letter-spacing:.2px}
+  .appbar p{font-size:12px;color:var(--ink-faint);font-weight:500}
+  .appbar .spacer{flex:1}
+  .avatar{
+    width:40px;height:40px;border-radius:50%;
+    background:linear-gradient(135deg,#FF9D2B,#FFDD00);
+    display:grid;place-items:center;
+    font-weight:800;font-size:13px;color:#4A3800;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.6);
+  }
+
+  /* ---------- Layout ---------- */
+  main{
+    flex:1;
+    width:100%;max-width:1040px;
+    margin:0 auto;
+    padding:8px 28px 0;
+    display:grid;
+    grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+    gap:24px;
+    align-items:start;
+  }
+  @media(max-width:880px){
+    main{grid-template-columns:1fr;padding-inline:16px}
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);
+    padding:32px;
+    animation:rise .55s cubic-bezier(.22,.9,.3,1) both;
+  }
+  .card.side{
+    padding:28px;
+    animation-delay:.12s;
+  }
+  @keyframes rise{
+    from{opacity:0;transform:translateY(16px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;
+    color:var(--ink-soft);
+    background:var(--yellow);
+    padding:6px 12px;border-radius:999px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--ink)}
+
+  h2.title{font-size:30px;font-weight:800;letter-spacing:-.5px;margin-top:16px;line-height:1.15}
+  .sub{margin-top:8px;font-size:14.5px;color:var(--ink-soft);line-height:1.55}
+
+  /* ---------- Progress ---------- */
+  .progress-wrap{margin-top:28px}
+  .progress-head{display:flex;justify-content:space-between;align-items:baseline}
+  .progress-head .pct{font-size:15px;font-weight:800}
+  .progress-head .pct em{font-style:normal;color:var(--ink-faint);font-weight:600}
+  .bar{
+    position:relative;margin-top:10px;height:14px;
+    background:#EEF0F3;border-radius:99px;overflow:hidden;
+  }
+  .bar .fill{
+    position:absolute;inset:0;width:62%;
+    border-radius:99px;
+    background:linear-gradient(90deg,var(--yellow-deep),#FFE94A);
+    animation:grow 1.2s .2s cubic-bezier(.25,1,.3,1) both;
+  }
+  @keyframes grow{from{width:0}}
+  .milestones{
+    position:relative;height:18px;margin-top:8px;
+    font-size:11px;font-weight:600;color:var(--ink-faint);
+  }
+  .milestones span{position:absolute;transform:translateX(-50%)}
+  .milestones span:first-child{transform:none}
+  .milestones span:last-child{transform:none;margin-left:auto}
+
+  /* ---------- Steps ---------- */
+  .steps{display:flex;flex-direction:column;gap:14px;margin-top:26px}
+  .step{
+    border:1.5px solid var(--line);
+    border-radius:var(--radius-md);
+    padding:16px 18px;
+    cursor:pointer;
+    transition:border-color .2s, box-shadow .2s, background .2s;
+    background:#fff;
+  }
+  .step:hover{border-color:rgba(10,26,51,.25)}
+  .step.active{
+    border-color:var(--ink);
+    box-shadow:0 10px 24px -14px rgba(10,26,51,.35);
+    background:#FFFDEB;
+  }
+  .step-row{display:flex;align-items:center;gap:14px}
+  .radio{
+    width:22px;height:22px;border-radius:50%;
+    border:2px solid var(--grey);
+    display:grid;place-items:center;flex-shrink:0;
+    transition:border-color .2s;
+  }
+  .step.active .radio{border-color:var(--ink)}
+  .radio .inner{width:10px;height:10px;border-radius:50%;background:transparent;transition:background .2s}
+  .step.active .radio .inner{background:var(--ink)}
+  .step-name{font-weight:700;font-size:15px}
+  .step-meta{font-size:12.5px;color:var(--ink-faint);font-weight:500;margin-top:2px}
+  .step-right{margin-left:auto;text-align:right}
+  .step-amount{font-weight:800;font-size:15px}
+  .step-monthly{font-size:12px;color:var(--blue);font-weight:700;margin-top:2px}
+
+  /* ---------- Custom amount ---------- */
+  .input{
+    margin-top:8px;
+    display:flex;align-items:center;gap:10px;
+    border:1.5px solid var(--line);
+    border-radius:16px;
+    padding:13px 16px;
+    background:#fff;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .input:focus-within{
+    border-color:var(--ink);
+    box-shadow:0 0 0 3px rgba(255,221,0,.4);
+  }
+  .input span{font-weight:800;font-size:15px;color:var(--ink-faint)}
+  .input input{
+    border:none;outline:none;flex:1;
+    font-family:inherit;font-size:15.5px;font-weight:700;color:var(--ink);
+    background:transparent;min-width:0;
+  }
+  .hint{
+    align-self:flex-end;
+    font-size:12px;font-weight:700;color:var(--blue);
+    background:#E1F0FF;
+    padding:9px 13px;border-radius:12px;
+    margin-bottom:1px;
+    white-space:nowrap;
+  }
+
+  /* ---------- Summary / result ---------- */
+  .result{
+    margin-top:26px;
+    background:var(--ink);
+    color:#fff;
+    border-radius:var(--radius-lg);
+    padding:26px 28px;
+    box-shadow:0 24px 50px -20px rgba(10,26,51,.55);
+  }
+  .result .label{font-size:12px;color:rgba(255,255,255,.62);font-weight:600;letter-spacing:.3px}
+  .result .big{font-size:36px;font-weight:800;letter-spacing:-1px;margin-top:6px}
+  .result .big small{font-size:16px;font-weight:600;color:rgba(255,255,255,.75);margin-left:6px}
+  .result-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;
+    margin-top:18px;
+  }
+  .result-cell{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;padding:13px 15px;
+  }
+  .result-cell .k{font-size:11px;color:rgba(255,255,255,.6);font-weight:600}
+  .result-cell .v{font-size:15.5px;font-weight:800;margin-top:3px}
+  .result-cell .v .pos{color:#63E6A9}
+
+  .actions{display:flex;gap:12px;margin-top:22px}
+  .btn{
+    flex:1;
+    border:none;border-radius:16px;
+    padding:15px 18px;
+    font-family:inherit;font-size:14.5px;font-weight:800;
+    cursor:pointer;transition:transform .15s, box-shadow .2s, background .2s;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn-primary{
+    background:var(--yellow);color:var(--ink);
+    box-shadow:0 12px 26px -10px rgba(246,206,0,.85);
+  }
+  .btn-primary:hover{background:#FFE94A}
+  .btn-ghost{
+    background:transparent;color:#fff;
+    border:1.5px solid rgba(255,255,255,.35);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.08)}
+
+  /* ---------- Side card ---------- */
+  .side .side-head{
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .side h3{font-size:17px;font-weight:800}
+  .tag{
+    font-size:10.5px;font-weight:800;letter-spacing:.6px;
+    color:#0B6E3F;background:#DDF5E7;
+    padding:5px 10px;border-radius:999px;text-transform:uppercase;
+  }
+  .chart{
+    margin-top:22px;
+    background:linear-gradient(180deg,#FFFDF4,#FFFBE0);
+    border:1px solid #F4E9B0;
+    border-radius:var(--radius-md);
+    padding:20px;
+  }
+  .chart svg{width:100%;height:auto;display:block}
+  .chart .caption{
+    margin-top:14px;display:flex;justify-content:space-between;
+    font-size:12px;font-weight:700;color:var(--ink-soft);
+  }
+  .chart .caption span:last-child{color:var(--green)}
+
+  .feature{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:14px 4px;
+    border-bottom:1px dashed var(--line);
+  }
+  .feature:last-child{border-bottom:none;padding-bottom:4px}
+  .feature .ic{
+    width:34px;height:34px;border-radius:12px;flex-shrink:0;
+    display:grid;place-items:center;font-size:15px;
+  }
+  .feature:nth-child(odd) .ic{background:#FFF6CC}
+  .feature:nth-child(even) .ic{background:#E1F0FF}
+  .feature b{font-size:13.5px;display:block}
+  .feature p{font-size:12.5px;color:var(--ink-faint);margin-top:2px;line-height:1.45}
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;
+    padding:34px 20px 26px;
+    font-size:11.5px;
+    color:var(--ink-faint);
+    font-weight:500;
+  }
+</style>
+</head>
+<body>
+
+  <header class="appbar">
+    <div class="badge">İş</div>
+    <div>
+      <h1>İşbank Dijital</h1>
+      <p>Kişisel Finans · Birikim</p>
+    </div>
+    <div class="spacer"></div>
+    <div class="avatar">AD</div>
+  </header>
+
+  <main>
+    <!-- LEFT: goal setup -->
+    <section class="card">
+      <span class="eyebrow"><span class="dot"></span>Birikim Hedefi</span>
+      <h2 class="title">Hayalindeki tatile<br>güvenle yaklaş.</h2>
+      <p class="sub">Hedefine göre aylık planını seç; İşbank senin yerine otomatik biriktirsin. Dilediğin an duraklatabilir veya düzenleyebilirsin.</p>
+
+      <div class="progress-wrap">
+        <div class="progress-head">
+          <strong>İlerleme</strong>
+          <span class="pct"><em>Hedefin — </em>₺120.000 · <strong style="color:var(--ink)">%62</strong></span>
+        </div>
+        <div class="bar"><div class="fill"></div></div>
+        <div class="milestones">
+          <span>₺0</span>
+          <span style="left:62%">₺74.400</span>
+          <span>₺120.000</span>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step" onclick="pick(this)">
+          <div class="step-row">
+            <div class="radio"><div class="inner"></div></div>
+            <div>
+              <div class="step-name">Sakin Tempo</div>
+              <div class="step-meta">12 ay · düşük aylık kesinti</div>
+            </div>
+            <div class="step-right">
+              <div class="step-amount">₺3.800 / ay</div>
+              <div class="step-monthly">₺45.600 biriktirilir</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step active" onclick="pick(this)">
+          <div class="step-row">
+            <div class="radio"><div class="inner"></div></div>
+            <div>
+              <div class="step-name">Dengeli Plan</div>
+              <div class="step-meta">18 ay · en çok tercih edilen</div>
+            </div>
+            <div class="step-right">
+              <div class="step-amount">₺5.200 / ay</div>
+              <div class="step-monthly">₺93.600 biriktirilir</div>
+              <div class="tag" style="display:inline-block;margin-top:6px">Önerilen</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" onclick="pick(this)">
+          <div class="step-row">
+            <div class="radio"><div class="inner"></div></div>
+            <div>
+              <div class="step-name">Hızlı Yol</div>
+              <div class="step-meta">10 ay · hedefe erken ulaş</div>
+            </div>
+            <div class="step-right">
+              <div class="step-amount">₺11.800 / ay</div>
+              <div class="step-monthly">₺118.000 biriktirilir</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;display:flex;align-items:center;gap:10px;">
+        <div style="flex:1">
+          <label style="font-size:13px;font-weight:700;color:var(--ink-soft)">Özel tutar belirle</label>
+          <div class="input">
+            <span>₺</span>
+            <input id="custom" type="text" inputmode="numeric" placeholder="Örn. 6.500" oninput="customAmount(this.value)">
+          </div>
+        </div>
+        <div class="hint" id="custom-hint">18 ayda tamamlanır</div>
+      </div>
+    </section>
+
+    <!-- RIGHT: result summary -->
+    <section>
+      <div class="card side">
+        <div class="side-head">
+          <h3>Birikim Özeti</h3>
+          <span class="tag">Risk Etiketi: Düşük</span>
+        </div>
+
+        <div class="chart">
+          <svg viewBox="0 0 260 120" role="img" aria-label="Birikim büyüme grafiği">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#FFDD00" stop-opacity=".55"/>
+                <stop offset="1" stop-color="#FFDD00" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M10,100 L45,92 L80,84 L115,70 L150,55 L185,38 L220,22 L250,12 L250,110 L10,110 Z" fill="url(#g1)"/>
+            <path d="M10,100 L45,92 L80,84 L115,70 L150,55 L185,38 L220,22 L250,12"
+                  fill="none" stroke="#0A1A33" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="250" cy="12" r="4" fill="#FFDD00" stroke="#0A1A33" stroke-width="2"/>
+          </svg>
+          <div class="caption">
+            <span>Bugün</span>
+            <span>+18 ay · %86 tahmini gerçekleşme</span>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="ic">🛡️</div>
+          <div>
+            <b>TGR korumalı hesap</b>
+            <p>Birikimin TMSF güvencesi altında, anında erişilebilir.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="ic">🤖</div>
+          <div>
+            <b>Akıllı yuvarlama</b>
+            <p>Kart harcamalarının kuruşları hedefe aktarılır.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="ic">🔔</div>
+          <div>
+            <b>Esnek duraklatma</b>
+            <p>Zor günlerde taksiti durdur; dilediğinde devam et.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="label">18 AY SONUNDA ELİNE GEÇECEK TUTAR</div>
+        <div class="big">₺93.600 <small>+ tahmini ₺2.810 getiri</small></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Kurgusal senaryo, eğitim amaçlıdır.</footer>
+
+<script>
+  const steps=document.querySelectorAll('.step');
+  function pick(el){
+    steps.forEach(s=>s.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('custom').value='';
+  }
+  function customAmount(v){
+    if(v){
+      steps.forEach(s=>s.classList.remove('active'));
+    } else {
+      steps[1].classList.add('active');
+    }
+  }
+</script>
+</body>
+</html>

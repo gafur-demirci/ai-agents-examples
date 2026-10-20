@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liman · Tutar ve tarih — Kâşif yönü</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0E2A47;
+    --teal:#1FBFAE;
+    --teal-deep:#159587;
+    --teal-mist:#CDF1EC;
+    --teal-soft:#E9FAF8;
+    --ink-60:rgba(14,42,71,.62);
+    --ink-45:rgba(14,42,71,.45);
+    --line:rgba(14,42,71,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Manrope',sans-serif;
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:16px;padding:34px 16px;
+    background:
+      radial-gradient(700px 380px at 15% -5%, rgba(31,191,174,.16), transparent 60%),
+      linear-gradient(180deg,#F3FBFA,#E4F2EF);
+    color:var(--navy);
+  }
+  .device-hint{font-size:12px;letter-spacing:.4px;color:var(--ink-45);font-weight:600}
+  .pagefoot{font-size:11.5px;color:var(--ink-45);font-weight:500}
+
+  .phone{
+    width:390px;height:844px;flex:none;
+    background:#FFFFFF;border-radius:46px;
+    border:11px solid #0D1B2A;
+    box-shadow:0 46px 90px -34px rgba(14,42,71,.45);
+    overflow:hidden;position:relative;
+  }
+  .screen{height:100%;overflow-y:auto;scrollbar-width:none}
+  .screen::-webkit-scrollbar{display:none}
+
+  .top{padding:10px 16px 6px}
+  .status{
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:13px;font-weight:700;color:var(--navy);
+    padding:8px 6px 0;
+  }
+  .sicons{display:flex;align-items:center;gap:6px}
+  .appbar{display:flex;align-items:center;justify-content:space-between;margin:14px 0 12px}
+  .back{
+    width:42px;height:42px;border-radius:15px;border:none;
+    background:var(--teal-soft);color:var(--navy);
+    display:grid;place-items:center;cursor:pointer;
+  }
+  .ttl{font-size:15px;font-weight:800}
+  .dots{display:flex;gap:7px;align-items:center}
+  .dots span{width:7px;height:7px;border-radius:99px;background:var(--line)}
+  .dots span.on{width:20px;background:var(--teal)}
+
+  .scene{display:block;width:100%;height:auto;margin-top:6px}
+
+  h1{font-size:26px;font-weight:800;letter-spacing:-.3px;line-height:1.22;text-align:center;padding:16px 28px 0}
+  .sub{margin:10px 36px 0;text-align:center;font-size:14px;line-height:1.6;color:var(--ink-60)}
+
+  .tempo{
+    margin:18px 20px 0;border-radius:22px;
+    background:var(--teal-soft);border:1.5px solid rgba(31,191,174,.30);
+    padding:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+  }
+  .tempo button{
+    border:none;border-radius:16px;padding:12px 6px;font-family:inherit;
+    background:transparent;color:var(--navy);cursor:pointer;text-align:center;
+  }
+  .tempo button .a{font-size:15.5px;font-weight:800;font-variant-numeric:tabular-nums}
+  .tempo button .m{font-size:11px;font-weight:700;color:var(--ink-45);margin-top:2px}
+  .tempo button.on{background:var(--teal);color:#fff;box-shadow:0 10px 22px -10px rgba(31,191,174,.7)}
+  .tempo button.on .m{color:rgba(255,255,255,.85)}
+
+  .adjust{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    margin-top:12px;font-size:12.5px;font-weight:700;color:var(--ink-60);
+  }
+  .adjust button{
+    width:34px;height:34px;border-radius:12px;border:1.5px solid var(--line);
+    background:#fff;color:var(--navy);display:grid;place-items:center;cursor:pointer;
+  }
+  .adjust button:active{transform:scale(.93)}
+
+  .path{padding:8px 20px 0;position:relative}
+  .pstep{display:flex;gap:13px;align-items:center;padding:5px 0;position:relative}
+  .pstep .pin{
+    width:34px;height:34px;border-radius:50%;flex:none;z-index:1;
+    background:#fff;border:2px solid var(--teal-mist);
+    display:grid;place-items:center;color:var(--ink-45);
+  }
+  .pstep.done .pin{background:var(--teal);border-color:var(--teal);color:#fff}
+  .pstep:not(:last-child)::after{
+    content:"";position:absolute;left:16px;top:40px;bottom:-10px;width:2px;
+    background:var(--teal-mist);z-index:0;
+  }
+  .pinfo{font-size:12.5px;font-weight:700;color:var(--ink-60);line-height:1.35}
+  .pinfo b{color:var(--navy);font-variant-numeric:tabular-nums}
+
+  .arrive{
+    margin:16px 20px 0;border-radius:22px;padding:15px 18px;
+    display:flex;align-items:center;gap:14px;
+    background:linear-gradient(135deg,#1FBFAE,#128C79);color:#fff;
+    box-shadow:0 18px 36px -18px rgba(21,149,135,.75);
+  }
+  .arrive .flag{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.18);display:grid;place-items:center;flex:none}
+  .arrive .k{font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.78)}
+  .arrive .v{font-size:17.5px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
+
+  .cta{position:sticky;bottom:0;margin-top:18px;padding:14px 20px 12px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.95) 45%)}
+  .btn{
+    width:100%;border:none;border-radius:18px;background:var(--teal);color:#fff;
+    font-family:inherit;font-weight:800;font-size:15.5px;padding:16px;cursor:pointer;
+    box-shadow:0 16px 30px -14px rgba(31,191,174,.7);transition:transform .12s;
+  }
+  .btn:active{transform:scale(.985)}
+  .cta-note{display:block;text-align:center;margin-top:9px;font-size:11.5px;color:var(--ink-45);font-weight:600}
+  .legal{text-align:center;font-size:10.5px;color:var(--ink-45);padding:4px 20px 20px;font-weight:500}
+</style>
+</head>
+<body>
+
+  <span class="device-hint">Liman Mobil · Birikim Hedefi — Yön 2 · Kâşif</span>
+
+  <div class="phone" role="img" aria-label="Liman Mobil, Tutar ve tarih ekranı, kâşif yönü">
+    <div class="screen">
+
+      <div class="top">
+        <div class="status">
+          <span>09:41</span>
+          <span class="sicons">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+            <svg width="16" height="12" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2,5.5 C6,1.8 12,1.8 16,5.5"/><path d="M4.8,8.6 C7.4,6.4 10.6,6.4 13.2,8.6"/><circle cx="9" cy="11.6" r="1.4" fill="currentColor" stroke="none"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.75" y="0.75" width="20.5" height="10.5" rx="3" stroke="currentColor" opacity=".5" stroke-width="1.2"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.6" fill="currentColor"/><path d="M23.2,4.2 v3.6" stroke="currentColor" opacity=".5" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+        <div class="appbar">
+          <button class="back" type="button" aria-label="Geri">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <span class="ttl">Tutar ve tarih</span>
+          <div class="dots" aria-label="6 adımdan 3. adım">
+            <span></span><span></span><span class="on"></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+
+      <svg class="scene" viewBox="0 0 390 132" aria-hidden="true">
+        <rect width="390" height="132" fill="#E9FAF8"/>
+        <circle cx="316" cy="40" r="24" fill="#FDE9B7"/>
+        <circle cx="316" cy="40" r="33" fill="#FDF3D7" opacity=".55"/>
+        <path d="M0,104 C60,88 120,118 190,100 C255,84 320,108 390,92 L390,132 L0,132 Z" fill="#CDF1EC"/>
+        <path d="M0,116 C70,102 140,126 210,110 C280,96 335,116 390,104 L390,132 L0,132 Z" fill="#9FD9CE" opacity=".55"/>
+        <path d="M40,96 c8,-10 26,-10 34,0 c-6,3 -28,3 -34,0 Z" fill="#0E2A47" opacity=".82"/>
+        <path d="M70,94 c-2,-6 -2,-12 0,-17 l12,15 Z" fill="#0E2A47" opacity=".82"/>
+        <g transform="translate(214,64)">
+          <path d="M0,18 C10,14 26,14 34,19 C26,24 8,24 0,18 Z" fill="#1FBFAE"/>
+          <path d="M32,18 C30,8 30,4 33,-2 L44,16 Z" fill="#0E2A47"/>
+          <path d="M15,18 C15,8 16,4 18,-3 L21,-2 C20,3 19,9 19,18 Z" fill="#0E2A47" opacity=".85"/>
+          <path d="M16.5,-3 C10,1 6,2 2,1" fill="none" stroke="#0E2A47" stroke-width="1.6" stroke-linecap="round"/>
+        </g>
+        <circle cx="60" cy="30" r="2.4" fill="#1FBFAE" opacity=".7"/>
+        <circle cx="98" cy="52" r="1.8" fill="#1FBFAE" opacity=".5"/>
+        <circle cx="262" cy="24" r="1.8" fill="#1FBFAE" opacity=".6"/>
+      </svg>
+
+      <h1>Hedefini koy,<br>yola çık.</h1>
+      <p class="sub">60.000 ₺ ile 1 Temmuz 2027'ye küçük deniz yolculuğu. Tempo seç, rota seninle birlikte çizilsin.</p>
+
+      <div class="tempo" role="group" aria-label="Tempo seçimi">
+        <button type="button" data-m="60000"><span class="a">10.000 ₺</span><span class="m">6 ay · rüzgâr ardına</span></button>
+        <button type="button" data-m="7500" class="on"><span class="a">7.500 ₺</span><span class="m">8 ay · sakin deniz</span></button>
+        <button type="button" data-m="5000"><span class="a">5.000 ₺</span><span class="m">12 ay · uzun kıyı</span></button>
+      </div>
+
+      <div class="adjust">
+        <button type="button" id="minus" aria-label="Tutarı azalt">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>
+        </button>
+        <span>Kendi temponu kur · <span id="amt" style="color:var(--navy)">7.500 ₺</span>/ay</span>
+        <button type="button" id="plus" aria-label="Tutarı artır">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+
+      <div class="path" id="path">
+        <div class="pstep done" id="n0">
+          <span class="pin"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+          <div class="pinfo"><b>İlk aktarım · 1 Aralık 2026</b> · <span id="echo0">7.500</span> ₺ ile limandan çıkış</div>
+        </div>
+        <div class="pstep" id="n4">
+          <span class="pin"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.2"/></svg></span>
+          <div class="pinfo"><b>1 Mayıs 2027</b> ilk aktarımdan 5 ay sonra, ara durak</div>
+        </div>
+        <div class="pstep" id="nEnd">
+          <span class="pin"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4l12 5-12 5"/></svg></span>
+          <div class="pinfo" id="echoEnd"><b>1 Temmuz 2027</b> hedef adası, <b>60.000 ₺</b></div>
+        </div>
+      </div>
+
+      <div class="arrive">
+        <span class="flag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="13" height="13" rx="3"/><path d="M8 3.2v-1M13 3.2v-1M11.6 17l-3 4M15.5 17l3 4"/></svg>
+        </span>
+        <span>
+          <span class="k">Hedef ada</span><br>
+          <span class="v" id="when">1 Temmuz 2027 · 8 ay</span>
+        </span>
+      </div>
+
+      <div class="cta">
+        <button class="btn" type="button">Rotayı onayla</button>
+        <span class="cta-note">Sonraki adım · Otomatik aktarım</span>
+      </div>
+      <p class="legal">Kurgusal senaryo, eğitim amaçlı.</p>
+    </div>
+  </div>
+
+  <p class="pagefoot">Kurgusal senaryo, eğitim amaçlı.</p>
+
+<script>
+  const GOAL = 60000;
+  const MN = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+  let amt = 7500;
+  const $ = id => document.getElementById(id);
+
+  function fmt(n){ return n.toLocaleString('tr-TR'); }
+  function dstr(d){ return d.getDate() + ' ' + MN[d.getMonth()] + ' ' + d.getFullYear(); }
+  function endOf(a){ const m = Math.ceil(GOAL / a); return { m, d: new Date(2026, 11 + m - 1, 1) }; }
+
+  function render(){
+    const { m, d } = endOf(amt);
+    $('amt').textContent = fmt(amt) + ' ₺';
+    $('echo0').textContent = fmt(amt);
+    $('when').textContent = dstr(d) + ' · ' + m + ' ay';
+
+    /* yatay kısıt: içerik dikeyde değişmiyor, sadece tarihler güncelleniyor */
+    const d4 = new Date(2026, 11 + 4, 1);
+    $('n4').querySelector('.pinfo').innerHTML = '<b>' + dstr(d4) + '</b> ilk aktarımdan 4 ay sonra, ara durak';
+    $('echoEnd').innerHTML = '<b>' + dstr(d) + '</b> hedef adası, <b>' + fmt(GOAL) + ' ₺</b>';
+  }
+
+  document.querySelectorAll('.tempo button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.tempo button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      amt = parseInt(b.dataset.m, 10);
+      render();
+    });
+  });
+  $('minus').addEventListener('click', () => { amt = Math.max(1000, amt - 500); render(); });
+  $('plus').addEventListener('click',  () => { amt = Math.min(25000, amt + 500); render(); });
+
+  render();
+</script>
+</body>
+</html>
