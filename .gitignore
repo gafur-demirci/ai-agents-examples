@@ -1,3 +1,5 @@
 .env
 .venv
 hf-test-model
+ai-lesson-project/*/.venv
+ai-lesson-project/*/__pycache__
