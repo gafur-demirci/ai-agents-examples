@@ -1,4 +1,4 @@
-"""LLM ve Ollama gerektirmeyen testler: araçlar, doğrulama, agent döngüsü, yönlendirme."""
+"""LLM- and Ollama-free tests: tools, validation, agent loop, routing."""
 import json
 import tempfile
 import unittest
@@ -7,21 +7,23 @@ from types import SimpleNamespace
 
 from src import config, db
 from src.agents import reports, tickets
-from src.llm import AgentSpec, run_agent
+from src.llm import AgentSpec, _parse_tool_json, run_agent
 from src.rag import chunk_markdown
 from src.supervisor import CLARIFY, handle
 
 
 def reply(content="", calls=None):
+    """Build a fake chat response message."""
     return SimpleNamespace(message=SimpleNamespace(content=content, tool_calls=calls))
 
 
 def call(name, args):
+    """Build a fake structured tool call."""
     return SimpleNamespace(function=SimpleNamespace(name=name, arguments=args))
 
 
 class FakeClient:
-    """Sıradaki hazır yanıtları döner; gelen istekleri kaydeder."""
+    """Returns queued responses; records incoming requests for assertions."""
     def __init__(self, *responses):
         self.responses, self.requests = list(responses), []
 
@@ -34,6 +36,7 @@ class FakeClient:
 
 
 class TempEnv(unittest.TestCase):
+    """Redirects DB/outputs to a temp dir so tests never touch real data."""
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
         tmp = Path(self._tmp.name)
@@ -134,6 +137,7 @@ class ChunkTests(unittest.TestCase):
 
 class AgentLoopTests(TempEnv):
     def test_tool_call_then_answer(self):
+        """Structured tool call -> executed -> tool result fed back -> final answer."""
         spec = tickets.build()
         client = FakeClient(
             reply(calls=[call("create_ticket", {"title": "VPN sorunu", "description": "VPN bağlanmıyor",
@@ -184,6 +188,41 @@ class AgentLoopTests(TempEnv):
         run_agent(client, spec, hist, "son")
         self.assertEqual(len(client.requests[0]["messages"]), 1 + config.HISTORY_WINDOW + 1)
 
+    def test_parse_tool_json_accepts_and_rejects(self):
+        """Content salvage: raw JSON, fenced, wrapped in prose are accepted."""
+        tool = '{"name": "create_ticket", "arguments": {"title": "x"}}'
+        self.assertEqual(_parse_tool_json(tool), ("create_ticket", {"title": "x"}))
+        self.assertEqual(_parse_tool_json(f"```json\n{tool}\n```"), ("create_ticket", {"title": "x"}))
+        self.assertEqual(_parse_tool_json(f'önsöz {tool} kuyruk'), ("create_ticket", {"title": "x"}))
+        self.assertEqual(_parse_tool_json('{"name": "x"}'), ("x", {}))
+        # Non-tool JSON and garbage must be rejected.
+        self.assertIsNone(_parse_tool_json("normal metin"))
+        self.assertIsNone(_parse_tool_json('{"route": "talep"}'))
+        self.assertIsNone(_parse_tool_json('{"name": 3}'))
+        self.assertIsNone(_parse_tool_json('{"name": "x", "arguments": [1]}'))
+        self.assertIsNone(_parse_tool_json('{"kesik'))
+
+    def test_content_json_tool_call_is_salvaged_and_executed(self):
+        """Regression: model writes the call as plain JSON in content; it must still run."""
+        spec = tickets.build()
+        client = FakeClient(
+            reply('{"name": "create_ticket", "arguments": {"title": "VPN sorunu", \
+"description": "VPN bağlanmıyor", "category": "IT", "priority": "Yüksek", "requester": "Ayşe Yılmaz"}}'),
+            reply("Talebiniz TKT-0001 olarak açıldı."))
+        res = run_agent(client, spec, [], "VPN bağlanmıyor, adım Ayşe Yılmaz")
+        self.assertEqual(res.answer, "Talebiniz TKT-0001 olarak açıldı.")
+        self.assertEqual(res.steps[0]["tool"], "create_ticket")
+        self.assertTrue(res.steps[0]["result"]["ok"])
+        self.assertEqual(res.steps[0]["result"]["ticket"]["id"], "TKT-0001")
+
+    def test_salvaged_unknown_tool_gets_error_feedback(self):
+        spec = tickets.build()
+        client = FakeClient(reply('{"name": "hack", "arguments": {}}'), reply("Böyle bir araç yok."))
+        res = run_agent(client, spec, [], "x")
+        self.assertFalse(res.steps[0]["result"]["ok"])
+        self.assertIn("araç yok", res.steps[0]["result"]["error"])
+        self.assertEqual(res.answer, "Böyle bir araç yok.")
+
 
 class SupervisorTests(TempEnv):
     def agents(self):
@@ -193,7 +232,7 @@ class SupervisorTests(TempEnv):
         client = FakeClient(reply(json.dumps({"route": "bilgi", "reason": "izin sorusu"})), reply("14 gün."))
         turn = handle(client, self.agents(), [], "Yıllık iznim kaç gün?")
         self.assertEqual((turn.route, turn.answer), ("bilgi", "14 gün."))
-        self.assertIn("format", client.requests[0])  # yapılandırılmış çıktı isteniyor
+        self.assertIn("format", client.requests[0])  # structured output requested
 
     def test_bad_router_output_falls_back_to_clarification(self):
         for bad in ("json değil", json.dumps({"route": "uçuş", "reason": ""}), None):

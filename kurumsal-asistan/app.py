@@ -1,4 +1,4 @@
-"""Streamlit arayüzü: tek sohbet kutusu, arkada Supervisor + 3 uzman agent."""
+"""Streamlit UI: single chat box backed by a Supervisor + 3 expert agents."""
 from pathlib import Path
 
 import pandas as pd
@@ -12,6 +12,7 @@ from src.supervisor import handle
 
 st.set_page_config(page_title="Kurumsal Operasyon Asistanı", page_icon="🏢", layout="wide")
 
+# Display labels for the route chosen by the supervisor.
 ROUTE_LABELS = {"bilgi": "📚 Bilgi Agent'ı (RAG)", "talep": "🎫 Talep Agent'ı",
                 "rapor": "📊 Rapor Agent'ı", "belirsiz": "❓ Netleştirme"}
 EXAMPLES = [
@@ -25,6 +26,7 @@ EXAMPLES = [
 
 @st.cache_resource
 def get_runtime():
+    """Build the LLM client, knowledge base and agent specs once per process."""
     client = make_client()
     kb = KnowledgeBase(client)
     agents = {"bilgi": knowledge.build(kb), "talep": tickets.build(), "rapor": reports.build()}
@@ -52,6 +54,7 @@ with st.sidebar:
 
 
 def render(m: dict):
+    """Render one chat message: text, route caption, chart images and tool-step expander."""
     with st.chat_message(m["role"]):
         st.markdown(m["content"])
         if m.get("route"):
@@ -73,6 +76,7 @@ with tab_chat:
     for m in st.session_state.messages:
         render(m)
 
+    # chat_input or a clicked example (stored as "pending") triggers a turn.
     prompt = st.chat_input("Bir soru sorun, sorun bildirin veya rapor isteyin...") \
         or st.session_state.pop("pending", None)
     if prompt:

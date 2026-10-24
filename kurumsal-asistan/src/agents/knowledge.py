@@ -1,4 +1,4 @@
-"""Bilgi Agent'ı: kurum dokümanlarında RAG ile arama yapar ve kaynak göstererek yanıtlar."""
+"""Knowledge Agent: searches corporate docs via RAG and answers with cited sources."""
 from ..llm import AgentSpec
 from ..rag import KnowledgeBase
 
@@ -10,6 +10,7 @@ Kurallar:
 4. Arama sonuç döndürmezse "Bu konuda dokümanlarda bilgi bulamadım" de ve destek talebi açmayı öner. Asla tahmin yürütme.
 5. Kısa ve net Türkçe yanıt ver."""
 
+# Single tool: semantic search over the indexed policy documents.
 SCHEMAS = [{
     "type": "function",
     "function": {

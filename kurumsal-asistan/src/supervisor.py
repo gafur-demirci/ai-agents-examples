@@ -1,4 +1,4 @@
-"""Supervisor: kullanıcı niyetini sınıflandırır ve uygun uzman agent'a yönlendirir."""
+"""Supervisor: classifies user intent and routes to the matching expert agent."""
 import json
 from dataclasses import dataclass, field
 
@@ -14,6 +14,7 @@ ROUTER_SYSTEM = """Bir kurumsal asistanın yönlendiricisisin. Kullanıcının S
 - belirsiz: Yukarıdakilerin hiçbiri veya anlaşılamayan mesaj
 Önemli: Önceki asistan mesajı bir soru soruyorsa ve kullanıcı ona cevap veriyorsa, aynı konuya (aynı rota) devam et."""
 
+# Structured output schema so the router answer is always parseable JSON.
 ROUTER_SCHEMA = {
     "type": "object",
     "properties": {"route": {"type": "string", "enum": ROUTES}, "reason": {"type": "string"}},
@@ -37,6 +38,7 @@ class Turn:
 
 
 def route_message(client, history: list[dict], user_message: str) -> dict:
+    """Ask the model to classify intent; falls back to 'belirsiz' on malformed output."""
     messages = [{"role": "system", "content": ROUTER_SYSTEM}]
     messages += history[-4:] + [{"role": "user", "content": user_message}]
     resp = client.chat(model=config.LLM_MODEL, messages=messages,
@@ -51,6 +53,7 @@ def route_message(client, history: list[dict], user_message: str) -> dict:
 
 
 def handle(client, agents: dict[str, AgentSpec], history: list[dict], user_message: str) -> Turn:
+    """One full conversation turn: classify -> dispatch to the expert agent."""
     if not user_message.strip():
         return Turn("belirsiz", CLARIFY)
     try:

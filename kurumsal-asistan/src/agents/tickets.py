@@ -1,4 +1,4 @@
-"""Talep Agent'ı: sorunu anlar, eksik bilgiyi sorar, talebi sınıflandırıp ilgili ekibe atar."""
+"""Ticket Agent: understands the issue, asks for missing info, classifies, routes to a team."""
 from .. import db
 from ..llm import AgentSpec
 
@@ -14,12 +14,14 @@ Kısa ve net Türkçe yanıt ver."""
 
 
 def _fn(name, desc, props, required):
+    """Build one OpenAI-style function schema entry."""
     return {"type": "function", "function": {
         "name": name, "description": desc,
         "parameters": {"type": "object", "properties": props, "required": required}}}
 
 
 _STR = {"type": "string"}
+# Tool schemas exposed to the model; enums mirror db constants.
 SCHEMAS = [
     _fn("create_ticket", "Yeni destek talebi oluşturur ve ilgili ekibe atar.",
         {"title": {"type": "string", "description": "Kısa başlık"},
@@ -38,6 +40,7 @@ SCHEMAS = [
 
 
 def build() -> AgentSpec:
+    # Wrap db functions so every tool result is a JSON-serializable dict.
     funcs = {
         "create_ticket": lambda **kw: {"ticket": db.create_ticket(**kw)},
         "get_ticket": lambda ticket_id: {"ticket": db.get_ticket(ticket_id)},

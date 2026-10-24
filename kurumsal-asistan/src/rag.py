@@ -1,12 +1,12 @@
-"""RAG: Markdown dokümanlarını böl -> embedding -> ChromaDB -> anlamsal arama."""
+"""RAG: split Markdown docs -> embed -> store in ChromaDB -> semantic search."""
 from . import config
 
 COLLECTION = "kurumsal_dokumanlar"
 
 
 def chunk_markdown(text: str, source: str, max_chars: int = 900) -> list[dict]:
-    """Başlık bazlı bölme. Uzun bölümler paragraf sınırından parçalanır.
-    Her parçaya başlık eklenir; böylece parça tek başına anlam taşır."""
+    """Split by headings; long sections break at paragraph boundaries.
+    Each chunk is prefixed with its heading so it is meaningful on its own."""
     sections, title, buf = [], "Giriş", []
     for line in text.splitlines():
         if line.lstrip().startswith("#"):
@@ -36,14 +36,14 @@ class KnowledgeBase:
         self.client = client
 
     def _collection(self, reset: bool = False):
-        import chromadb  # geç yükleme: testler chromadb gerektirmez
+        import chromadb  # lazy import: tests do not require chromadb
 
         db = chromadb.PersistentClient(path=str(config.CHROMA_DIR))
         if reset:
             try:
                 db.delete_collection(COLLECTION)
             except Exception:
-                pass  # koleksiyon yoksa sorun değil
+                pass  # nothing to delete on first run
         return db.get_or_create_collection(COLLECTION, metadata={"hnsw:space": "cosine"})
 
     def _embed(self, texts: list[str]) -> list[list[float]]:
@@ -51,7 +51,7 @@ class KnowledgeBase:
         return [list(e) for e in resp.embeddings]
 
     def index(self) -> int:
-        """Dokümanları baştan indeksler (idempotent). Parça sayısını döner."""
+        """Re-index all docs from scratch (idempotent). Returns the chunk count."""
         chunks = []
         for path in sorted(config.DOCS_DIR.glob("*.md")):
             chunks += chunk_markdown(path.read_text(encoding="utf-8"), path.name)
@@ -67,6 +67,8 @@ class KnowledgeBase:
         return len(chunks)
 
     def search(self, query: str, k: int | None = None) -> list[dict]:
+        """Semantic search; auto-indexes on first call. Drops hits beyond MAX_DISTANCE
+        so irrelevant results become 'no answer' instead of a hallucination."""
         col = self._collection()
         if col.count() == 0:
             self.index()
@@ -74,7 +76,7 @@ class KnowledgeBase:
         res = col.query(query_embeddings=self._embed([query]), n_results=k or config.TOP_K)
         hits = []
         for doc, meta, dist in zip(res["documents"][0], res["metadatas"][0], res["distances"][0]):
-            if dist <= config.MAX_DISTANCE:  # alakasız sonuçları ele: uydurmayı önler
+            if dist <= config.MAX_DISTANCE:  # discard unrelated results: prevents guesswork
                 hits.append({"source": meta["source"], "section": meta["section"],
                              "text": doc, "distance": round(dist, 3)})
         return hits

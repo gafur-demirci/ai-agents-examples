@@ -1,10 +1,10 @@
-"""Rapor Agent'ı: satış verisini güvenli analiz araçlarıyla inceler, grafik ve rapor üretir.
-Model kod yazmaz/çalıştırmaz; yalnızca önceden tanımlı, doğrulanmış araçları çağırır."""
+"""Report Agent: analyzes sales data via safe, predefined tools; produces charts and Markdown reports.
+The model never writes/executes code; it only calls verified tools."""
 from datetime import datetime
 
 import matplotlib
 
-matplotlib.use("Agg")  # ekransız ortamda grafik üretimi
+matplotlib.use("Agg")  # headless chart rendering
 import matplotlib.pyplot as plt  # noqa: E402
 import pandas as pd  # noqa: E402
 
@@ -37,6 +37,7 @@ _CORE = {"group_by": {"type": "string", "enum": GROUPS},
 
 
 def _fn(name, desc, props, required):
+    """Build one OpenAI-style function schema entry."""
     return {"type": "function", "function": {
         "name": name, "description": desc,
         "parameters": {"type": "object", "properties": props, "required": required}}}
@@ -57,6 +58,7 @@ SCHEMAS = [
 
 
 def _load() -> pd.DataFrame:
+    """Load the sales CSV and derive derived columns (revenue = qty x unit price, month)."""
     if not config.SALES_CSV.exists():
         raise ValueError(f"Veri dosyası bulunamadı: {config.SALES_CSV}")
     try:
@@ -72,7 +74,7 @@ def _load() -> pd.DataFrame:
 
 
 def _pick(df, column, value):
-    """Filtre değerini Türkçe karakterlere duyarsız eşleştirir; yoksa geçerli değerleri bildirir."""
+    """Match a filter value case/diacritic-insensitively; list valid values on miss."""
     options = sorted(df[column].unique())
     for opt in options:
         if fold(opt) == fold(value):
@@ -88,6 +90,7 @@ def _date(value, label):
 
 
 def _query(group_by, metric, bolge=None, urun=None, baslangic=None, bitis=None) -> pd.Series:
+    """Validate arguments, apply filters, return the grouped sum series."""
     if group_by not in GROUPS:
         raise ValueError(f"group_by şunlardan biri olmalı: {', '.join(GROUPS)}")
     if metric not in METRICS:

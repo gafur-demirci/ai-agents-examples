@@ -1,4 +1,4 @@
-"""Destek talebi deposu (SQLite). Doğrulama burada yapılır; hatalar ValueError olarak döner."""
+"""Support ticket store (SQLite). Validation lives here; failures raise ValueError."""
 import re
 import sqlite3
 from contextlib import contextmanager
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS tickets (
 
 @contextmanager
 def _conn():
+    """Open a connection, ensure the schema exists, commit on success."""
     config.DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     con = sqlite3.connect(config.DB_PATH)
     con.row_factory = sqlite3.Row
@@ -42,6 +43,7 @@ def _conn():
 
 
 def _match(value, options, label):
+    """Case/diacritic-insensitive enum match; raises ValueError with valid options."""
     f = fold(value)
     for opt in options:
         if fold(opt) == f:
@@ -57,6 +59,7 @@ def _require(value, label):
 
 
 def _parse_id(ticket_id):
+    """Accept any ID format containing digits (e.g. 'TKT-0001', 'tkt-1')."""
     found = re.search(r"\d+", str(ticket_id))
     if not found:
         raise ValueError(f"Geçersiz talep numarası: '{ticket_id}'. Örnek: TKT-0001")
@@ -64,6 +67,7 @@ def _parse_id(ticket_id):
 
 
 def _to_dict(row):
+    """Convert a row to a dict with a TKT-xxxx id and derived SLA hours."""
     d = dict(row)
     d["id"] = f"TKT-{d['id']:04d}"
     d["sla_saat"] = SLA_HOURS[d["priority"]]
@@ -96,6 +100,7 @@ def get_ticket(ticket_id):
 
 
 def list_tickets(status=None, requester=None, limit=10):
+    """List tickets, newest first; optional status filter (SQL) and requester substring filter."""
     query, params = "SELECT * FROM tickets", []
     if status:
         query += " WHERE status=?"

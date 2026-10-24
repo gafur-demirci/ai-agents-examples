@@ -37,6 +37,7 @@ Kullanıcı (Streamlit)
 | Supervisor + uzman agent'lar | Her agent küçük bir araç seti ve odaklı prompt ile daha güvenilir çalışır |
 | Rapor agent'ı kod çalıştırmaz, hazır analiz araçlarını çağırır | Güvenlik (rastgele kod çalıştırma yok) ve doğrulanabilir sayılar |
 | Araç hataları modele geri bildirilir | Model hatayı okuyup düzeltir (ör. geçersiz kategori → yeniden dener) |
+| Content'e gömülü JSON araç çağrısı kurtarılır | Bazı modeller (ör. qwen2.5-coder) çağrıyı `tool_calls` yerine düz metin olarak yazar; `src/llm.py` bunu yakayıp çalıştırır |
 | `MAX_AGENT_STEPS` üst sınırı | Sonsuz araç çağırma döngüsünü engeller |
 | RAG'de mesafe eşiği | Alakasız sonuçta "bilmiyorum" der, uydurmaz |
 | Son N mesaj hafızası | Takip cevaplarını ("Adım Ayşe Yılmaz") doğru agent'a bağlar |
