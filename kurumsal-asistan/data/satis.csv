@@ -1,0 +1,361 @@
+tarih,bolge,urun,adet,birim_fiyat
+2026-01-01,Marmara,Bulut Depolama,33,1228.99
+2026-01-01,Marmara,Siber Güvenlik Paketi,11,3357.79
+2026-01-01,Marmara,Destek Hizmeti,27,820.7
+2026-01-01,Karadeniz,Destek Hizmeti,9,814.42
+2026-01-02,İç Anadolu,Siber Güvenlik Paketi,6,3606.77
+2026-01-03,Ege,ERP Lisansı,3,9046.84
+2026-01-03,Akdeniz,ERP Lisansı,2,9098.22
+2026-01-03,İç Anadolu,Siber Güvenlik Paketi,7,3398.84
+2026-01-04,Ege,Siber Güvenlik Paketi,6,3450.64
+2026-01-04,Karadeniz,Siber Güvenlik Paketi,3,3378.49
+2026-01-05,İç Anadolu,Destek Hizmeti,15,781.19
+2026-01-05,Marmara,Bulut Depolama,26,1228.38
+2026-01-06,Akdeniz,Siber Güvenlik Paketi,7,3454.56
+2026-01-07,Ege,Destek Hizmeti,14,816.37
+2026-01-08,Karadeniz,Bulut Depolama,10,1259.68
+2026-01-08,Akdeniz,Bulut Depolama,12,1232.77
+2026-01-09,Akdeniz,ERP Lisansı,2,9181.64
+2026-01-09,Akdeniz,Destek Hizmeti,12,839.16
+2026-01-09,Akdeniz,Siber Güvenlik Paketi,5,3483.69
+2026-01-09,Ege,Siber Güvenlik Paketi,7,3607.49
+2026-01-09,Karadeniz,Destek Hizmeti,8,837.69
+2026-01-13,Karadeniz,ERP Lisansı,1,9086.3
+2026-01-13,İç Anadolu,ERP Lisansı,3,9346.21
+2026-01-14,Ege,Bulut Depolama,16,1180.83
+2026-01-14,Karadeniz,Bulut Depolama,12,1247.74
+2026-01-15,Marmara,Destek Hizmeti,22,807.14
+2026-01-16,Karadeniz,Siber Güvenlik Paketi,3,3356.82
+2026-01-18,Ege,ERP Lisansı,3,8662.34
+2026-01-18,İç Anadolu,Bulut Depolama,20,1166.35
+2026-01-18,Marmara,Siber Güvenlik Paketi,13,3355.43
+2026-01-18,İç Anadolu,Destek Hizmeti,12,803.12
+2026-01-20,Ege,Destek Hizmeti,19,830.84
+2026-01-20,Marmara,ERP Lisansı,3,8573.88
+2026-01-21,Marmara,ERP Lisansı,3,9181.19
+2026-01-22,Karadeniz,ERP Lisansı,1,8929.94
+2026-01-23,İç Anadolu,ERP Lisansı,3,8833.21
+2026-01-24,Akdeniz,Destek Hizmeti,10,779.58
+2026-01-25,İç Anadolu,Bulut Depolama,17,1233.12
+2026-01-25,Ege,Bulut Depolama,16,1180.39
+2026-01-28,Akdeniz,Bulut Depolama,21,1167.93
+2026-02-02,İç Anadolu,Destek Hizmeti,16,792.21
+2026-02-02,Akdeniz,Destek Hizmeti,11,828.77
+2026-02-03,Karadeniz,Siber Güvenlik Paketi,5,3480.1
+2026-02-03,Akdeniz,ERP Lisansı,2,8854.28
+2026-02-03,Ege,ERP Lisansı,3,9208.72
+2026-02-04,İç Anadolu,ERP Lisansı,2,9143.08
+2026-02-06,Marmara,ERP Lisansı,4,9006.91
+2026-02-06,Marmara,Destek Hizmeti,22,803.15
+2026-02-07,Akdeniz,Bulut Depolama,18,1251.47
+2026-02-08,İç Anadolu,Bulut Depolama,14,1173.42
+2026-02-08,Akdeniz,ERP Lisansı,2,9079.6
+2026-02-08,Ege,Siber Güvenlik Paketi,7,3632.3
+2026-02-09,Karadeniz,Siber Güvenlik Paketi,4,3486.92
+2026-02-09,Ege,Destek Hizmeti,16,802.21
+2026-02-11,Marmara,Bulut Depolama,37,1153.39
+2026-02-14,İç Anadolu,ERP Lisansı,2,8970.32
+2026-02-15,Marmara,Siber Güvenlik Paketi,11,3326.14
+2026-02-16,Karadeniz,Destek Hizmeti,6,798.51
+2026-02-16,Ege,Bulut Depolama,22,1142.34
+2026-02-16,İç Anadolu,Siber Güvenlik Paketi,6,3607.62
+2026-02-17,Akdeniz,Siber Güvenlik Paketi,6,3483.02
+2026-02-17,Ege,Bulut Depolama,25,1250.22
+2026-02-18,İç Anadolu,Bulut Depolama,19,1155.88
+2026-02-18,Karadeniz,ERP Lisansı,2,8638.12
+2026-02-18,Karadeniz,ERP Lisansı,1,9302.42
+2026-02-18,Marmara,Bulut Depolama,24,1230.11
+2026-02-18,Karadeniz,Bulut Depolama,9,1193.83
+2026-02-19,İç Anadolu,Siber Güvenlik Paketi,9,3526.67
+2026-02-20,Marmara,Destek Hizmeti,26,775.91
+2026-02-21,Marmara,ERP Lisansı,3,8818.6
+2026-02-22,Akdeniz,Siber Güvenlik Paketi,6,3552.46
+2026-02-22,İç Anadolu,Destek Hizmeti,16,812.28
+2026-02-22,Ege,Destek Hizmeti,12,798.02
+2026-02-23,Akdeniz,Destek Hizmeti,9,810.49
+2026-02-23,Akdeniz,Bulut Depolama,20,1164.14
+2026-02-24,Marmara,Siber Güvenlik Paketi,14,3417.19
+2026-02-25,Ege,ERP Lisansı,3,9029.44
+2026-02-25,Karadeniz,Destek Hizmeti,10,827.9
+2026-02-27,Ege,Siber Güvenlik Paketi,10,3607.37
+2026-02-28,Karadeniz,Bulut Depolama,10,1153.11
+2026-03-02,Marmara,Bulut Depolama,40,1159.76
+2026-03-02,Marmara,Destek Hizmeti,22,806.73
+2026-03-03,Akdeniz,Siber Güvenlik Paketi,8,3328.26
+2026-03-03,Ege,ERP Lisansı,2,8927.3
+2026-03-04,İç Anadolu,Siber Güvenlik Paketi,9,3653.63
+2026-03-04,İç Anadolu,Siber Güvenlik Paketi,6,3636.4
+2026-03-05,İç Anadolu,ERP Lisansı,3,8795.11
+2026-03-06,Karadeniz,Siber Güvenlik Paketi,5,3584.43
+2026-03-07,Akdeniz,ERP Lisansı,2,9005.3
+2026-03-07,Marmara,ERP Lisansı,3,9421.84
+2026-03-08,Ege,ERP Lisansı,3,9071.03
+2026-03-12,Akdeniz,Destek Hizmeti,16,782.8
+2026-03-12,Akdeniz,ERP Lisansı,2,9342.78
+2026-03-13,Akdeniz,Bulut Depolama,15,1155.71
+2026-03-13,Marmara,Bulut Depolama,23,1171.82
+2026-03-13,Ege,Siber Güvenlik Paketi,10,3366.96
+2026-03-14,Karadeniz,Destek Hizmeti,8,770.2
+2026-03-14,Karadeniz,Siber Güvenlik Paketi,4,3521.32
+2026-03-15,Marmara,Siber Güvenlik Paketi,14,3424.84
+2026-03-15,Akdeniz,Bulut Depolama,19,1177.94
+2026-03-17,Ege,Bulut Depolama,16,1149.61
+2026-03-17,Ege,Destek Hizmeti,17,785.31
+2026-03-18,Akdeniz,Destek Hizmeti,13,816.28
+2026-03-18,Marmara,Destek Hizmeti,26,764.88
+2026-03-19,Akdeniz,Siber Güvenlik Paketi,7,3673.63
+2026-03-20,Ege,Siber Güvenlik Paketi,7,3348.79
+2026-03-22,Ege,Destek Hizmeti,14,817.3
+2026-03-23,Karadeniz,ERP Lisansı,1,9363.54
+2026-03-23,İç Anadolu,ERP Lisansı,3,8858.59
+2026-03-23,Marmara,ERP Lisansı,4,8988.0
+2026-03-24,Marmara,Siber Güvenlik Paketi,14,3673.4
+2026-03-25,Karadeniz,Bulut Depolama,8,1155.7
+2026-03-26,Karadeniz,Destek Hizmeti,7,837.78
+2026-03-26,İç Anadolu,Bulut Depolama,21,1218.48
+2026-03-27,Karadeniz,ERP Lisansı,1,8882.29
+2026-03-27,İç Anadolu,Bulut Depolama,14,1206.55
+2026-03-27,Karadeniz,Bulut Depolama,12,1173.2
+2026-03-28,İç Anadolu,Destek Hizmeti,15,764.06
+2026-03-28,İç Anadolu,Destek Hizmeti,16,781.12
+2026-03-28,Ege,Bulut Depolama,22,1203.74
+2026-04-03,İç Anadolu,Bulut Depolama,19,1253.86
+2026-04-04,Marmara,Bulut Depolama,29,1182.44
+2026-04-05,Marmara,Siber Güvenlik Paketi,14,3649.02
+2026-04-06,İç Anadolu,Destek Hizmeti,17,809.24
+2026-04-06,Marmara,ERP Lisansı,4,9428.59
+2026-04-07,Karadeniz,Bulut Depolama,10,1191.59
+2026-04-08,Karadeniz,Destek Hizmeti,11,813.82
+2026-04-08,Ege,ERP Lisansı,3,8750.63
+2026-04-08,Ege,Siber Güvenlik Paketi,10,3394.85
+2026-04-09,Akdeniz,Bulut Depolama,14,1161.43
+2026-04-09,Akdeniz,Siber Güvenlik Paketi,9,3338.39
+2026-04-09,Ege,Bulut Depolama,27,1159.1
+2026-04-10,Karadeniz,ERP Lisansı,2,9013.91
+2026-04-10,İç Anadolu,ERP Lisansı,2,9048.97
+2026-04-11,Karadeniz,Destek Hizmeti,9,767.47
+2026-04-11,Akdeniz,Bulut Depolama,22,1252.71
+2026-04-11,Marmara,Destek Hizmeti,29,822.59
+2026-04-12,Ege,Siber Güvenlik Paketi,11,3431.82
+2026-04-12,Akdeniz,Siber Güvenlik Paketi,7,3579.99
+2026-04-12,Marmara,Bulut Depolama,24,1165.21
+2026-04-13,Ege,ERP Lisansı,3,8845.44
+2026-04-13,Ege,Destek Hizmeti,18,814.36
+2026-04-13,Ege,Bulut Depolama,25,1244.66
+2026-04-14,Akdeniz,Destek Hizmeti,10,760.14
+2026-04-14,Marmara,ERP Lisansı,5,8572.31
+2026-04-18,Karadeniz,Bulut Depolama,10,1240.05
+2026-04-18,Akdeniz,Destek Hizmeti,17,814.95
+2026-04-19,Akdeniz,ERP Lisansı,2,8721.07
+2026-04-20,İç Anadolu,Siber Güvenlik Paketi,9,3434.87
+2026-04-20,Akdeniz,ERP Lisansı,2,9435.81
+2026-04-21,Karadeniz,Siber Güvenlik Paketi,4,3437.79
+2026-04-22,İç Anadolu,ERP Lisansı,3,8917.55
+2026-04-22,İç Anadolu,Destek Hizmeti,12,835.23
+2026-04-22,Karadeniz,Siber Güvenlik Paketi,4,3399.8
+2026-04-22,Marmara,Destek Hizmeti,24,829.13
+2026-04-24,İç Anadolu,Siber Güvenlik Paketi,9,3640.02
+2026-04-24,İç Anadolu,Bulut Depolama,25,1220.48
+2026-04-25,Ege,Destek Hizmeti,20,782.33
+2026-04-26,Karadeniz,ERP Lisansı,1,9212.37
+2026-04-28,Marmara,Siber Güvenlik Paketi,13,3467.23
+2026-05-01,İç Anadolu,Destek Hizmeti,15,791.11
+2026-05-01,Marmara,ERP Lisansı,5,9353.39
+2026-05-02,Karadeniz,ERP Lisansı,1,8784.14
+2026-05-02,Ege,Bulut Depolama,23,1206.89
+2026-05-04,Ege,Bulut Depolama,29,1194.78
+2026-05-04,Marmara,Destek Hizmeti,31,822.27
+2026-05-05,Akdeniz,ERP Lisansı,2,8758.14
+2026-05-06,Ege,Destek Hizmeti,18,819.49
+2026-05-07,Akdeniz,Destek Hizmeti,13,826.63
+2026-05-07,Marmara,Siber Güvenlik Paketi,14,3576.42
+2026-05-07,Marmara,Bulut Depolama,29,1157.68
+2026-05-09,Akdeniz,Bulut Depolama,22,1231.9
+2026-05-09,Ege,Destek Hizmeti,17,820.14
+2026-05-11,Akdeniz,Destek Hizmeti,13,803.41
+2026-05-11,Akdeniz,Siber Güvenlik Paketi,6,3637.56
+2026-05-11,Ege,Siber Güvenlik Paketi,9,3657.51
+2026-05-13,Karadeniz,Destek Hizmeti,10,782.26
+2026-05-13,Marmara,ERP Lisansı,4,8769.59
+2026-05-14,Ege,ERP Lisansı,4,9297.51
+2026-05-14,Karadeniz,ERP Lisansı,1,8672.13
+2026-05-15,Karadeniz,Destek Hizmeti,8,786.15
+2026-05-15,Karadeniz,Bulut Depolama,9,1250.34
+2026-05-15,Marmara,Siber Güvenlik Paketi,15,3470.05
+2026-05-16,İç Anadolu,Destek Hizmeti,19,777.55
+2026-05-16,Marmara,Bulut Depolama,25,1213.35
+2026-05-16,İç Anadolu,Siber Güvenlik Paketi,8,3327.06
+2026-05-18,Karadeniz,Siber Güvenlik Paketi,6,3334.44
+2026-05-18,İç Anadolu,ERP Lisansı,3,9269.88
+2026-05-19,Karadeniz,Siber Güvenlik Paketi,4,3557.05
+2026-05-20,Ege,ERP Lisansı,4,9283.51
+2026-05-21,Akdeniz,Bulut Depolama,19,1168.71
+2026-05-22,Ege,Siber Güvenlik Paketi,10,3510.9
+2026-05-23,Akdeniz,ERP Lisansı,3,8742.56
+2026-05-23,Akdeniz,Siber Güvenlik Paketi,7,3425.0
+2026-05-25,İç Anadolu,Siber Güvenlik Paketi,7,3461.5
+2026-05-25,İç Anadolu,Bulut Depolama,19,1210.09
+2026-05-26,Karadeniz,Bulut Depolama,13,1188.52
+2026-05-26,Marmara,Destek Hizmeti,22,836.64
+2026-05-27,İç Anadolu,ERP Lisansı,3,8927.12
+2026-05-28,İç Anadolu,Bulut Depolama,23,1245.68
+2026-06-01,Marmara,Bulut Depolama,27,1229.88
+2026-06-03,Akdeniz,Siber Güvenlik Paketi,8,3502.09
+2026-06-03,Ege,ERP Lisansı,3,9082.89
+2026-06-04,Marmara,Destek Hizmeti,26,805.12
+2026-06-04,Ege,Bulut Depolama,27,1233.34
+2026-06-05,Marmara,ERP Lisansı,3,8764.69
+2026-06-06,Akdeniz,Destek Hizmeti,11,818.7
+2026-06-07,Karadeniz,Bulut Depolama,12,1150.27
+2026-06-07,İç Anadolu,Destek Hizmeti,13,788.39
+2026-06-08,İç Anadolu,Siber Güvenlik Paketi,7,3615.76
+2026-06-08,Ege,Destek Hizmeti,21,768.15
+2026-06-08,Marmara,ERP Lisansı,3,8729.42
+2026-06-09,İç Anadolu,Destek Hizmeti,14,830.43
+2026-06-09,Karadeniz,Bulut Depolama,13,1206.69
+2026-06-09,Akdeniz,Destek Hizmeti,18,809.27
+2026-06-10,Ege,Siber Güvenlik Paketi,7,3362.83
+2026-06-10,Ege,Siber Güvenlik Paketi,6,3526.53
+2026-06-12,Marmara,Siber Güvenlik Paketi,10,3403.48
+2026-06-12,Karadeniz,Destek Hizmeti,9,794.04
+2026-06-12,Akdeniz,Bulut Depolama,22,1203.93
+2026-06-13,Karadeniz,ERP Lisansı,1,9172.61
+2026-06-13,Ege,ERP Lisansı,4,8906.99
+2026-06-14,Marmara,Bulut Depolama,45,1170.27
+2026-06-14,Akdeniz,ERP Lisansı,2,9414.71
+2026-06-15,İç Anadolu,Siber Güvenlik Paketi,6,3410.35
+2026-06-16,Karadeniz,Siber Güvenlik Paketi,4,3551.07
+2026-06-16,Karadeniz,Siber Güvenlik Paketi,5,3519.31
+2026-06-16,İç Anadolu,ERP Lisansı,2,9315.86
+2026-06-19,Karadeniz,Destek Hizmeti,8,789.52
+2026-06-20,Ege,Bulut Depolama,22,1212.87
+2026-06-20,İç Anadolu,ERP Lisansı,3,9151.37
+2026-06-21,Marmara,Siber Güvenlik Paketi,10,3339.09
+2026-06-23,Marmara,Destek Hizmeti,22,780.5
+2026-06-24,İç Anadolu,Bulut Depolama,20,1211.1
+2026-06-25,İç Anadolu,Bulut Depolama,27,1198.02
+2026-06-26,Karadeniz,ERP Lisansı,1,8565.52
+2026-06-26,Akdeniz,Bulut Depolama,22,1258.06
+2026-06-27,Akdeniz,ERP Lisansı,3,8963.77
+2026-06-28,Akdeniz,Siber Güvenlik Paketi,6,3472.02
+2026-06-28,Ege,Destek Hizmeti,21,814.74
+2026-07-02,Ege,ERP Lisansı,2,8777.23
+2026-07-02,Ege,Bulut Depolama,10,1206.4
+2026-07-03,Ege,Destek Hizmeti,9,806.16
+2026-07-04,Karadeniz,Bulut Depolama,10,1205.35
+2026-07-04,Ege,Destek Hizmeti,12,825.77
+2026-07-04,Marmara,Destek Hizmeti,24,826.61
+2026-07-04,Ege,Siber Güvenlik Paketi,6,3630.45
+2026-07-04,Karadeniz,ERP Lisansı,1,8971.83
+2026-07-05,Ege,Siber Güvenlik Paketi,6,3548.25
+2026-07-05,Akdeniz,Bulut Depolama,22,1157.9
+2026-07-06,Karadeniz,Siber Güvenlik Paketi,3,3602.42
+2026-07-06,İç Anadolu,Siber Güvenlik Paketi,8,3325.94
+2026-07-06,İç Anadolu,Bulut Depolama,24,1168.78
+2026-07-07,Marmara,Siber Güvenlik Paketi,11,3435.44
+2026-07-09,Karadeniz,Bulut Depolama,13,1239.2
+2026-07-09,İç Anadolu,Destek Hizmeti,14,823.03
+2026-07-10,İç Anadolu,ERP Lisansı,2,9186.26
+2026-07-10,Marmara,Bulut Depolama,35,1170.17
+2026-07-10,Akdeniz,Bulut Depolama,20,1150.22
+2026-07-11,Marmara,Bulut Depolama,42,1182.22
+2026-07-12,Marmara,Destek Hizmeti,24,774.36
+2026-07-13,Akdeniz,ERP Lisansı,3,8955.46
+2026-07-13,Karadeniz,ERP Lisansı,1,9398.41
+2026-07-14,Karadeniz,Destek Hizmeti,10,818.76
+2026-07-15,İç Anadolu,ERP Lisansı,3,8614.06
+2026-07-16,Ege,ERP Lisansı,2,8980.84
+2026-07-16,Karadeniz,Destek Hizmeti,9,795.02
+2026-07-18,Ege,Bulut Depolama,9,1155.19
+2026-07-18,Akdeniz,Siber Güvenlik Paketi,6,3592.56
+2026-07-19,Akdeniz,Destek Hizmeti,14,809.68
+2026-07-20,İç Anadolu,Siber Güvenlik Paketi,8,3489.47
+2026-07-21,İç Anadolu,Bulut Depolama,25,1165.32
+2026-07-22,İç Anadolu,Destek Hizmeti,18,824.31
+2026-07-24,Akdeniz,Destek Hizmeti,15,767.94
+2026-07-24,Marmara,ERP Lisansı,4,8985.78
+2026-07-25,Marmara,ERP Lisansı,5,9022.17
+2026-07-25,Marmara,Siber Güvenlik Paketi,16,3566.56
+2026-07-26,Akdeniz,Siber Güvenlik Paketi,8,3541.45
+2026-07-27,Karadeniz,Siber Güvenlik Paketi,5,3524.22
+2026-07-28,Akdeniz,ERP Lisansı,2,9079.67
+2026-08-01,Marmara,Bulut Depolama,40,1150.96
+2026-08-01,Marmara,Siber Güvenlik Paketi,15,3674.85
+2026-08-04,Akdeniz,Siber Güvenlik Paketi,8,3335.1
+2026-08-04,Ege,ERP Lisansı,1,9423.17
+2026-08-05,İç Anadolu,Bulut Depolama,24,1199.81
+2026-08-06,Marmara,ERP Lisansı,5,8973.45
+2026-08-07,Akdeniz,Bulut Depolama,23,1172.05
+2026-08-07,Ege,Destek Hizmeti,10,801.48
+2026-08-08,Akdeniz,Destek Hizmeti,14,839.38
+2026-08-08,Karadeniz,ERP Lisansı,2,9064.62
+2026-08-09,Marmara,ERP Lisansı,5,8713.34
+2026-08-09,Marmara,Siber Güvenlik Paketi,15,3526.69
+2026-08-10,Akdeniz,Siber Güvenlik Paketi,6,3478.34
+2026-08-11,Karadeniz,ERP Lisansı,2,9332.64
+2026-08-13,Ege,Siber Güvenlik Paketi,4,3609.75
+2026-08-14,Ege,Bulut Depolama,11,1223.24
+2026-08-15,Akdeniz,Destek Hizmeti,19,835.76
+2026-08-15,Ege,Siber Güvenlik Paketi,5,3355.82
+2026-08-16,Akdeniz,Bulut Depolama,21,1215.05
+2026-08-16,Karadeniz,Destek Hizmeti,8,816.42
+2026-08-16,İç Anadolu,Siber Güvenlik Paketi,8,3668.09
+2026-08-16,Marmara,Destek Hizmeti,36,787.84
+2026-08-17,İç Anadolu,Destek Hizmeti,21,781.37
+2026-08-17,İç Anadolu,Bulut Depolama,25,1224.65
+2026-08-17,Ege,ERP Lisansı,2,9292.43
+2026-08-18,Akdeniz,ERP Lisansı,2,8562.31
+2026-08-18,İç Anadolu,Siber Güvenlik Paketi,7,3375.62
+2026-08-18,Karadeniz,Siber Güvenlik Paketi,4,3494.52
+2026-08-20,İç Anadolu,ERP Lisansı,2,9007.42
+2026-08-21,Marmara,Destek Hizmeti,29,825.14
+2026-08-22,Ege,Bulut Depolama,12,1152.55
+2026-08-22,Karadeniz,Bulut Depolama,13,1198.76
+2026-08-24,Karadeniz,Bulut Depolama,9,1175.83
+2026-08-25,Karadeniz,Destek Hizmeti,8,792.86
+2026-08-25,Karadeniz,Siber Güvenlik Paketi,4,3515.2
+2026-08-26,Akdeniz,ERP Lisansı,3,8765.37
+2026-08-27,Marmara,Bulut Depolama,48,1243.26
+2026-08-28,İç Anadolu,ERP Lisansı,3,8612.83
+2026-08-28,Ege,Destek Hizmeti,7,803.41
+2026-08-28,İç Anadolu,Destek Hizmeti,19,793.2
+2026-09-01,Marmara,ERP Lisansı,6,9200.2
+2026-09-02,Marmara,Siber Güvenlik Paketi,14,3369.19
+2026-09-06,Akdeniz,ERP Lisansı,3,8707.56
+2026-09-09,Akdeniz,Destek Hizmeti,15,796.77
+2026-09-10,Karadeniz,Siber Güvenlik Paketi,6,3596.51
+2026-09-10,İç Anadolu,Destek Hizmeti,22,761.76
+2026-09-10,İç Anadolu,ERP Lisansı,3,8729.3
+2026-09-10,Ege,ERP Lisansı,2,9447.68
+2026-09-11,Ege,Bulut Depolama,10,1242.28
+2026-09-11,Akdeniz,Bulut Depolama,15,1235.54
+2026-09-11,Marmara,Siber Güvenlik Paketi,18,3629.4
+2026-09-12,Akdeniz,Siber Güvenlik Paketi,7,3475.74
+2026-09-12,İç Anadolu,Siber Güvenlik Paketi,8,3670.68
+2026-09-12,İç Anadolu,Destek Hizmeti,16,805.98
+2026-09-13,Akdeniz,ERP Lisansı,3,9107.74
+2026-09-13,Marmara,Bulut Depolama,45,1258.61
+2026-09-13,Ege,Siber Güvenlik Paketi,6,3658.95
+2026-09-13,Karadeniz,Bulut Depolama,15,1172.94
+2026-09-14,Ege,Destek Hizmeti,12,838.27
+2026-09-14,Akdeniz,Siber Güvenlik Paketi,6,3523.07
+2026-09-14,İç Anadolu,Siber Güvenlik Paketi,8,3566.61
+2026-09-15,Marmara,ERP Lisansı,6,8639.74
+2026-09-16,İç Anadolu,ERP Lisansı,3,8645.99
+2026-09-18,İç Anadolu,Bulut Depolama,20,1158.96
+2026-09-19,Akdeniz,Destek Hizmeti,13,771.45
+2026-09-20,Karadeniz,Siber Güvenlik Paketi,6,3585.81
+2026-09-20,Ege,ERP Lisansı,2,8611.58
+2026-09-20,Karadeniz,ERP Lisansı,2,8775.56
+2026-09-21,Karadeniz,Destek Hizmeti,11,767.77
+2026-09-21,Marmara,Destek Hizmeti,27,837.6
+2026-09-21,Marmara,Bulut Depolama,45,1257.7
+2026-09-22,Karadeniz,Bulut Depolama,13,1233.4
+2026-09-23,Ege,Bulut Depolama,13,1187.7
+2026-09-23,Akdeniz,Bulut Depolama,20,1175.94
+2026-09-23,Ege,Destek Hizmeti,12,829.81
+2026-09-25,Karadeniz,Destek Hizmeti,11,812.73
+2026-09-25,Ege,Siber Güvenlik Paketi,6,3495.78
+2026-09-26,Marmara,Destek Hizmeti,21,837.54
+2026-09-26,Karadeniz,ERP Lisansı,1,8867.09
+2026-09-26,İç Anadolu,Bulut Depolama,25,1195.83
