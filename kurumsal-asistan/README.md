@@ -79,7 +79,6 @@ python -m streamlit run app.py
 Daha az RAM'li makinede `.env` içinde `LLM_MODEL=qwen2.5:7b` kullanın.
 
 Örnek veriyi yeniden üretmek için: `python scripts/generate_sales.py`
-
 ## Testler
 
 ```bash
@@ -104,7 +103,10 @@ LLM gerektirmez; araçları, doğrulamayı, agent döngüsünü (sahte model ile
 
 ## Ekran Görüntüleri
 
-> Uygulamayı çalıştırıp aşağıdaki dosya adlarıyla `docs/screenshots/` klasörüne kaydedin.
+> Görseller `scripts/capture_screenshots.py` ile otomatik oluşturulmuştur. Yeniden üretmek için:
+> Ollama çalışırken uygulamayı `python -m streamlit run app.py --server.port 8599 --server.headless true`
+> ile başlatıp ayrı bir terminalde `.venv/bin/python scripts/capture_screenshots.py` komutunu çalıştırın
+> (Playwright gerektirir: `pip install playwright && playwright install chromium`).
 
 | Görsel | İçerik |
 |---|---|
@@ -123,14 +125,31 @@ src/llm.py              Ollama istemcisi + araç çağıran agent döngüsü
 src/supervisor.py       Niyet sınıflandırma ve yönlendirme
 src/rag.py              Parçalama, embedding, ChromaDB arama
 src/db.py               Talep deposu (SQLite) ve doğrulama
+src/utils.py            Türkçe karakter duyarsız karşılaştırma yardımcıları
 src/agents/             knowledge.py · tickets.py · reports.py
+scripts/                generate_sales.py (örnek veri) · capture_screenshots.py (README görselleri)
 data/docs/              Örnek kurum politika dokümanları (kurgusal)
 data/satis.csv          Örnek satış verisi (scripts/generate_sales.py)
+data/tickets.db         SQLite talep deposu (ilk çalıştırmada oluşur)
+data/chroma/            ChromaDB vektör indeksi (ilk doküman aramasında oluşur)
+outputs/                Üretilen grafikler (charts/) ve raporlar (reports/)
+docs/screenshots/       README ekran görüntüleri (scripts/capture_screenshots.py)
 tests/                  Birim testleri
 ```
+
+## GUI Otomasyonu (Ekran Görüntüleri)
+
+`scripts/capture_screenshots.py`, Playwright ile çalışan uygulamayı sürer: örnek senaryoları
+sırayla gönderir, her agent turunun bitmesini bekler (yanıt + 🧭 rota etiketi + grafik render),
+"Agent adımları" panelini açar ve Talepler sekmesinin ekran görüntüsünü alır. README'deki
+görselleri yeniden üretmek için tasarlanmıştır; uygulamanın bir parçası değildir.
 
 ## Sınırlamalar
 
 - Veriler kurgusaldır; gerçek kullanımda doküman klasörü ve talep sistemi (ör. Jira/ServiceNow) entegrasyonu gerekir.
 - Kimlik doğrulama yoktur; talep sahibi sohbette beyan edilir.
 - Yerel model kalitesi donanıma bağlıdır; küçük modellerde araç seçimi daha hatalı olabilir.
+
+## Lisans
+
+Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.

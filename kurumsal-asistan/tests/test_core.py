@@ -191,19 +191,25 @@ class AgentLoopTests(TempEnv):
     def test_parse_tool_json_accepts_and_rejects(self):
         """Content salvage: raw JSON, fenced, wrapped in prose are accepted."""
         tool = '{"name": "create_ticket", "arguments": {"title": "x"}}'
-        self.assertEqual(_parse_tool_json(tool), ("create_ticket", {"title": "x"}))
-        self.assertEqual(_parse_tool_json(f"```json\n{tool}\n```"), ("create_ticket", {"title": "x"}))
-        self.assertEqual(_parse_tool_json(f'önsöz {tool} kuyruk'), ("create_ticket", {"title": "x"}))
-        self.assertEqual(_parse_tool_json('{"name": "x"}'), ("x", {}))
+        self.assertEqual(_parse_tool_json(tool), [("create_ticket", {"title": "x"})])
+        self.assertEqual(_parse_tool_json(f"```json\n{tool}\n```"), [("create_ticket", {"title": "x"})])
+        self.assertEqual(_parse_tool_json(f'önsöz {tool} kuyruk'), [("create_ticket", {"title": "x"})])
+        self.assertEqual(_parse_tool_json('{"name": "x"}'), [("x", {})])
+        # Multiple calls in one message must all be salvaged.
+        two = ('{"name": "search_documents", "arguments": {"query": "yıllık izin"}}\n'
+               '{"name": "search_documents", "arguments": {"query": "uzaktan çalışma"}}')
+        self.assertEqual([n for n, _ in _parse_tool_json(two)], ["search_documents", "search_documents"])
         # Non-tool JSON and garbage must be rejected.
-        self.assertIsNone(_parse_tool_json("normal metin"))
-        self.assertIsNone(_parse_tool_json('{"route": "talep"}'))
-        self.assertIsNone(_parse_tool_json('{"name": 3}'))
-        self.assertIsNone(_parse_tool_json('{"name": "x", "arguments": [1]}'))
-        self.assertIsNone(_parse_tool_json('{"kesik'))
+        self.assertEqual(_parse_tool_json("normal metin"), [])
+        self.assertEqual(_parse_tool_json('{"route": "talep"}'), [])
+        self.assertEqual(_parse_tool_json('{"name": 3}'), [])
+        self.assertEqual(_parse_tool_json('{"name": "x", "arguments": [1]}'), [])
+        self.assertEqual(_parse_tool_json('{"kesik'), [])
+        self.assertEqual(_parse_tool_json('{"kesik {"name": "ok", "arguments": {}}'), [("ok", {})])
 
     def test_content_json_tool_call_is_salvaged_and_executed(self):
-        """Regression: model writes the call as plain JSON in content; it must still run."""
+        """Regression: model writes the call as plain JSON in content; it must still run.
+        Multi-call content (one search per topic) executes every call in order."""
         spec = tickets.build()
         client = FakeClient(
             reply('{"name": "create_ticket", "arguments": {"title": "VPN sorunu", \
@@ -214,6 +220,13 @@ class AgentLoopTests(TempEnv):
         self.assertEqual(res.steps[0]["tool"], "create_ticket")
         self.assertTrue(res.steps[0]["result"]["ok"])
         self.assertEqual(res.steps[0]["result"]["ticket"]["id"], "TKT-0001")
+
+        knowledge = AgentSpec("k", "s", [], {"search_documents": lambda query: {"results": [query]}})
+        two = ('{"name": "search_documents", "arguments": {"query": "izin"}}\n'
+               '{"name": "search_documents", "arguments": {"query": "vpn"}}')
+        res2 = run_agent(FakeClient(reply(two), reply("İki arama yapıldı.")), knowledge, [], "izin ve vpn")
+        self.assertEqual([s["args"]["query"] for s in res2.steps], ["izin", "vpn"])
+        self.assertEqual(res2.answer, "İki arama yapıldı.")
 
     def test_salvaged_unknown_tool_gets_error_feedback(self):
         spec = tickets.build()

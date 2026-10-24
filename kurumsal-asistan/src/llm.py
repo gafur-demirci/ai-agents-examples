@@ -41,27 +41,32 @@ def check_models(client) -> tuple[bool, str]:
     return True, f"Hazır: {config.LLM_MODEL} + {config.EMBED_MODEL}"
 
 
-def _parse_tool_json(content: str) -> tuple[str, dict] | None:
-    """Salvage a tool call embedded as plain JSON in the message content.
+def _parse_tool_json(content: str) -> list[tuple[str, dict]]:
+    """Salvage tool calls embedded as plain JSON in the message content.
 
-    Some models (e.g. qwen2.5-coder) emit the call into `content` instead of the
+    Some models (e.g. qwen2.5-coder) emit calls into `content` instead of the
     structured `tool_calls` field; Ollama cannot convert that on its own. Extracts
-    {'name': ..., 'arguments': {...}} if present, otherwise returns None.
+    every top-level {'name': ..., 'arguments': {...}} object, so multi-call messages
+    (e.g. one search per topic) are handled too. Returns [] when nothing matches.
     """
     text = (content or "").strip()
     if "{" not in text:
-        return None
-    start, end = text.find("{"), text.rfind("}")
-    try:
-        data = json.loads(text[start:end + 1])
-    except (json.JSONDecodeError, ValueError):
-        return None
-    if not isinstance(data, dict) or not isinstance(data.get("name"), str):
-        return None
-    args = data.get("arguments")
-    if args is None:
-        args = {}
-    return (data["name"], args) if isinstance(args, dict) else None
+        return []
+    decoder, calls, i = json.JSONDecoder(), [], text.find("{")
+    while i != -1:
+        try:
+            obj, end = decoder.raw_decode(text, i)
+        except json.JSONDecodeError:
+            i = text.find("{", i + 1)
+            continue
+        if isinstance(obj, dict) and isinstance(obj.get("name"), str):
+            args = obj.get("arguments")
+            if args is None:
+                args = {}
+            if isinstance(args, dict):
+                calls.append((obj["name"], args))
+        i = text.find("{", end)
+    return calls
 
 
 def execute_tool(spec: AgentSpec, name: str, args: dict) -> dict:
@@ -100,9 +105,8 @@ def run_agent(client, spec: AgentSpec, history: list[dict], user_message: str) -
         calls = [(c.function.name, dict(c.function.arguments)) for c in (msg.tool_calls or [])]
         salvaged = False
         if not calls:
-            salvage = _parse_tool_json(msg.content)
-            if salvage:
-                calls, salvaged = [salvage], True
+            calls = _parse_tool_json(msg.content)
+            salvaged = bool(calls)
 
         # No tool call -> whatever the model said is the final answer.
         if not calls:
